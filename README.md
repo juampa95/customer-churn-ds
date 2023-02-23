@@ -1,1 +1,1 @@
-# customer-churn-ds
+# customer-churn
