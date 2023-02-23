@@ -46,7 +46,7 @@ H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para c
 H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente para clientes activos y retirados
 
 <div align="center">
- <img alt ="h1-image" src="/img/h1.png" width="949" height="640"//>
+ <img alt ="h1-image" src="/img/h1.png" width="949" height="604"//>
 </div>
 
 ### Hipótesis 2
@@ -57,7 +57,7 @@ H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual*
 H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **diferente** para clientes activos y retirados
 
 <div align="center">
- <img alt ="h2-image" src="/img/h2.png" width="949" height="640"//>
+ <img alt ="h2-image" src="/img/h2.png" width="949" height="604"//>
 </div>
 
 ## Hipótesis 3
@@ -67,7 +67,7 @@ H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual
 H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng_Q4_Q1) es **diferente** para clientes activos y retirados
 
 <div align="center">
- <img alt ="h3-image" src="/img/h3.png" width="949" height="640"//>
+ <img alt ="h3-image" src="/img/h3.png" width="949" height="604"//>
 </div>
 
 ## Pregunta 1
