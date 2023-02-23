@@ -16,7 +16,7 @@ Por ello, este proyecto aputanara a uno de los componentes mas importantes de un
 Utilizaremos un dataset brindando por un banco anonimo, con datos de su cartera de clientes. Como podremos observar el customer churn rate o taza de abandono de clientes es bastante elevado 
 
 <div align="center">
- <img alt ="pie-chart-chrun-rate" src="/img/chrun_rate.png" width="300" height="300"//>
+ <img alt ="pie-chart-chrun-rate" src="/img/chrun_rate.png" width="404" height="420"//>
 </div>
   
  Esto quiere decir que desde el año anterior a dia de hoy el banco perdio un 16,07% de sus clientes. 
