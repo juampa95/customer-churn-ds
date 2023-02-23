@@ -1,1 +1,80 @@
-# customer-churn
+# ABANDONO DE CLIENTES EN TARJETAS DE CRÉDITO
+
+<div align="center">
+ <img alt ="estado-en-progreso" src="/img/logo.png" width="400" height="300"//>
+</div>
+
+**Integrante:**
+- Alejandro Gutierrez 
+- Lourdes Rojos
+- Juan Pablo Manzano
+
+Como podremos saber, una empresa vende un producto o presta un servicio a sus clientes y de esto obtiene dinero, cumpliendo su objetivo principal el cual es generar ganancias.
+
+Por ello, este proyecto aputanara a uno de los componentes mas importantes de una empresa que son los clientes. Mas especificamente, analizaremos el abandono de los mismos, o mas conocido como customer chrun en ingles. 
+
+Utilizaremos un dataset brindando por un banco anonimo, con datos de su cartera de clientes. Como podremos observar el customer churn rate o taza de abandono de clientes es bastante elevado 
+
+<div align="center">
+ <img alt ="estado-en-progreso" src="/img/chrun_rate.png" width="300" height="300"//>
+</div>
+  
+ Esto quiere decir que desde el año anterior a dia de hoy el banco perdio un 16,07% de sus clientes. 
+  
+ # 1- OBJETIVOS
+
+**Objetivos principales**
+
+- Descubrir la causa por la cual hay deserción de clientes en las tarjetas de crédito
+-Pronosticar cuales son los posibles clientes que abandonaran las tarjetas de crédito
+
+**Objetivos secuendarios**
+
+- Determinar que Modelo se adapta de mejor manera a las necesidades del problema
+- Utilizar modelo para predecir grupos de clientes que abandonarian el banco
+- Testear modelos generados
+  
+# 2-Contexto comercial
+
+El Gerente comercial de un banco se encuentra frente a un listado de clientes que utilizan el servicio de tarjetas de crédito y detecta una alta taza de abandono de los mismos. Quieren analizar los datos para descubrir la razón detrás de esto y aprovechar lo mismo para predecir los clientes que probablemente abandonarán para poder tomar medidas sobre esto.
+  
+# 3- Problema comercial
+
+### Hipótesis 1
+H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para clientes activos y retirados
+
+H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente para clientes activos y retirados
+
+### Hipótesis 2
+
+
+H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual** para clientes activos y retirados
+
+H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **diferente** para clientes activos y retirados
+
+## Hipótesis 3
+
+H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual** para clientes activos y retirados 
+
+H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng_Q4_Q1) es **diferente** para clientes activos y retirados
+
+## Pregunta 1
+ ¿Cúal es el género que más abandona la tarjeta de crédito?
+
+## Pregunta 2
+ Los que abandonan la tarjeta de crédito, ¿Cúal es su estado civil?
+
+## Pregunta 3
+ ¿Que edades promedio tienen las personas que abandonan las tarjetas de crédito?
+
+## Pregunta 4
+¿Cuanto tiempo en promedio llevan las tarjetas sin utilizar de las personas que abandonan la tarjeta de crédito?
+
+## Pregunta 5 
+¿Que tipo de tarjeta usan los clientes que abandonan los servicios?
+
+## Pregunta 6 
+¿Que nivel de educacion tienen los clientes que abanonan los servicios?
+
+## Pregunta 7
+¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
