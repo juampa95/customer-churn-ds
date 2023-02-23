@@ -72,21 +72,49 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 ## Pregunta 1
  ¿Cúal es el género que más abandona la tarjeta de crédito?
+ 
+<div align="center">
+ <img alt ="p1-image" src="/img/p1.png" width="730" height="369"//>
+</div>
 
 ## Pregunta 2
  Los que abandonan la tarjeta de crédito, ¿Cúal es su estado civil?
+ 
+<div align="center">
+ <img alt ="p2-image" src="/img/p2.png" width="730" height="369"//>
+</div>
 
 ## Pregunta 3
  ¿Que edades promedio tienen las personas que abandonan las tarjetas de crédito?
+ 
+<div align="center">
+ <img alt ="p3-image" src="/img/p3.png" width="891" height="640"//>
+</div>
 
 ## Pregunta 4
 ¿Cuanto tiempo en promedio llevan las tarjetas sin utilizar de las personas que abandonan la tarjeta de crédito?
 
+<div align="center">
+ <img alt ="p4-image" src="/img/p4.png" width="891" height="640"//>
+</div>
+
 ## Pregunta 5 
 ¿Que tipo de tarjeta usan los clientes que abandonan los servicios?
+
+<div align="center">
+ <img alt ="p5-image" src="/img/p5.png" width="730" height="369"//>
+</div>
 
 ## Pregunta 6 
 ¿Que nivel de educacion tienen los clientes que abanonan los servicios?
 
+<div align="center">
+ <img alt ="p6-image" src="/img/p6.png" width="730" height="369"//>
+</div>
+
 ## Pregunta 7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
+
+<div align="center">
+ <img alt ="p7-image" src="/img/p7.png" width="730" height="369"//>
+</div>
