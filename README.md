@@ -1,7 +1,7 @@
 # ABANDONO DE CLIENTES EN TARJETAS DE CRÉDITO
 
 <div align="center">
- <img alt ="estado-en-progreso" src="/img/logo.png" width="400" height="300"//>
+ <img alt ="logo-chrun" src="/img/logo.png" width="400" height="300"//>
 </div>
 
 **Integrante:**
@@ -16,7 +16,7 @@ Por ello, este proyecto aputanara a uno de los componentes mas importantes de un
 Utilizaremos un dataset brindando por un banco anonimo, con datos de su cartera de clientes. Como podremos observar el customer churn rate o taza de abandono de clientes es bastante elevado 
 
 <div align="center">
- <img alt ="estado-en-progreso" src="/img/chrun_rate.png" width="300" height="300"//>
+ <img alt ="pie-chart-chrun-rate" src="/img/chrun_rate.png" width="300" height="300"//>
 </div>
   
  Esto quiere decir que desde el año anterior a dia de hoy el banco perdio un 16,07% de sus clientes. 
@@ -45,6 +45,10 @@ H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para c
 
 H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente para clientes activos y retirados
 
+<div align="center">
+ <img alt ="h1-image" src="/img/h1.png" width="949" height="640"//>
+</div>
+
 ### Hipótesis 2
 
 
@@ -52,11 +56,19 @@ H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual*
 
 H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **diferente** para clientes activos y retirados
 
+<div align="center">
+ <img alt ="h2-image" src="/img/h2.png" width="949" height="640"//>
+</div>
+
 ## Hipótesis 3
 
 H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual** para clientes activos y retirados 
 
 H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng_Q4_Q1) es **diferente** para clientes activos y retirados
+
+<div align="center">
+ <img alt ="h3-image" src="/img/h3.png" width="949" height="640"//>
+</div>
 
 ## Pregunta 1
  ¿Cúal es el género que más abandona la tarjeta de crédito?
