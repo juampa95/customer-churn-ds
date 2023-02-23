@@ -99,7 +99,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 </div>
 
 ## Pregunta 5 
-¿Que tipo de tarjeta usan los clientes que abandonan los servicios?
+¿Que tipo de tarjeta usan los clientes que abandonan los servicios??
 
 <div align="center">
  <img alt ="p5-image" src="/img/p5.png" width="730" height="369"//>
