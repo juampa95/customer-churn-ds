@@ -273,12 +273,15 @@ Con los gráficos anterior pudimos obtener algunos Insights que surgieron de hac
 ### Matríz de correlación
 Indica la correlación que hay entre todas las variables numericas de los datos que estamos trabajando 
 
+
 <div align="center">
- **Matriz de correlación segun coeficiente de Pearson**
- 
- <img alt ="matriz_cor_pearson-image" src="/mat_corr_pearson.png" width="903" height="586"//>
- 
- **TOP 5 VARIABLES CON MAYOR CORRELACIÓN**
+ <b>Matriz de correlación segun coeficiente de Pearson</b>
+ <img alt ="matriz_cor_pearson-image" src="/img/mat_corr_pearson.png" width="903" height="586"// title="Matriz de correlación segun coeficiente de Pearson">
+</div>
+
+<div align="center">
+
+**TOP 5 VARIABLES CON MAYOR CORRELACIÓN**
  
  |Variable 1 | Variable 2 | Coef.Pearson | 
  |------------------|-----------------------|-----------|
@@ -288,7 +291,6 @@ Indica la correlación que hay entre todas las variables numericas de los datos 
  |Total_Revolving_Bal  |Avg_Utilization_Ratio   | 0.624022
  |Avg_Open_To_Buy      |Avg_Utilization_Ratio   | 0.538808
 </div>
-
 
 
 >Nota: En ella podemos observar las variables de mayor correlacion en colores azul mas oscuro. Podemos detectar muy pocas variables que poseen una correlación. Tambien se hizo el análisis con correlaciones de kendall y spearman para ver si se observaba alguna diferencia. Pero las variables con mayor correlación son las mismas. Para ver las matrices de corrleación con otros coeficientes podemos verlas desde aquí [`Kendall`](img/mat_corr_kendall.png) Y [`Spearman`](img/mat_corr_spearman.png)
