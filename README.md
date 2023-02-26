@@ -268,7 +268,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 ## Análisis Multivariado
 
-Con los gráficos anterior pudimos obtener algunos Insights que surgieron de hacer un análisis univariado y bivariado. A continuación profundizaremos en esto haciendo observaciones mas complejas de manera multivariada.
+Con los gráficos anterior pudimos obtener algunos Insights que surgieron de hacer un análisis univariado y bivariado. A continuación profundizaremos en esto haciendo observaciones mas complejas de manera multivariada. Para acceder al notebook completo del análisis podemos hacer click [`AQUI`](multi.ipynb)
 
 ### Matríz de correlación
 Indica la correlación que hay entre todas las variables numericas de los datos que estamos trabajando 
