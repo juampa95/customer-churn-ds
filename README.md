@@ -1,7 +1,7 @@
 # ABANDONO DE CLIENTES EN TARJETAS DE CRÉDITO
 
 <div align="center">
- <img alt ="logo-chrun" src="/img/logo.png" width="400" height="300"//>
+ <img alt ="logo-chrun" src="/img/logo.png" width=50% height: auto//>
 </div>
 
 **Integrante:**
@@ -16,7 +16,7 @@ Por ello, este proyecto aputanara a uno de los componentes mas importantes de un
 Utilizaremos un dataset brindando por un banco anonimo, con datos de su cartera de clientes. Como podremos observar el customer churn rate o taza de abandono de clientes es bastante elevado 
 
 <div align="center">
- <img alt ="pie-chart-chrun-rate" src="/img/chrun_rate.png" width="404" height="420"//>
+ <img alt ="pie-chart-chrun-rate" src="/img/chrun_rate.png" width=50% height=auto//>
 </div>
   
  Esto quiere decir que desde el año anterior a dia de hoy el banco perdio un 16,07% de sus clientes. 
@@ -63,7 +63,7 @@ H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para c
 H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente para clientes activos y retirados
 
 <div align="center">
- <img alt ="h1-image" src="/img/h1.png" width="949" height="604"//>
+ <img alt ="h1-image" src="/img/h1.png"//>
 </div>
 
 *Nota: Como la variable presenta una gran cantidad de Outliers, el valor mas representativo pasa a ser la mediana*
@@ -87,7 +87,7 @@ H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual*
 H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **diferente** para clientes activos y retirados
 
 <div align="center">
- <img alt ="h2-image" src="/img/h2.png" width="949" height="604"//>
+ <img alt ="h2-image" src="/img/h2.png"//>
 </div>
 
 *Nota: Como la variable presenta una gran cantidad de Outliers, el valor mas representativo pasa a ser la mediana*
@@ -111,7 +111,7 @@ H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual
 H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng_Q4_Q1) es **diferente** para clientes activos y retirados
 
 <div align="center">
- <img alt ="h3-image" src="/img/h3.png" width="949" height="604"//>
+ <img alt ="h3-image" src="/img/h3.png" //>
 </div>
 
 *Nota: Como la variable presenta una gran cantidad de Outliers, el valor mas representativo pasa a ser la mediana*
@@ -131,7 +131,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  ¿Cúal es el género que más abandona la tarjeta de crédito?
  
 <div align="center">
- <img alt ="p1-image" src="/img/p1.png" width="730" height="369"//>
+ <img alt ="p1-image" src="/img/p1.png"//>
 </div>
 
 <div align="center">
@@ -149,7 +149,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  Los que abandonan la tarjeta de crédito, ¿Cúal es su estado civil?
  
 <div align="center">
- <img alt ="p2-image" src="/img/p2.png" width="730" height="369"//>
+ <img alt ="p2-image" src="/img/p2.png" //>
 </div>
 
 <div align="center">
@@ -169,7 +169,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  ¿Que edades promedio tienen las personas que abandonan las tarjetas de crédito?
  
 <div align="center">
- <img alt ="p3-image" src="/img/p3.png" width="891" height="640"//>
+ <img alt ="p3-image" src="/img/p3.png" //>
 </div>
 
 <div align="center">
@@ -187,7 +187,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ¿Cuanto tiempo en promedio llevan las tarjetas sin utilizar de las personas que abandonan la tarjeta de crédito?
 
 <div align="center">
- <img alt ="p4-image" src="/img/p4.png" width="891" height="640"//>
+ <img alt ="p4-image" src="/img/p4.png" //>
 </div>
 
 <div align="center">
@@ -205,7 +205,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ¿Que tipo de tarjeta usan los clientes que abandonan los servicios??
 
 <div align="center">
- <img alt ="p5-image" src="/img/p5.png" width="730" height="369"//>
+ <img alt ="p5-image" src="/img/p5.png"//>
 </div>
 
 <div align="center">
@@ -225,7 +225,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ¿Que nivel de educacion tienen los clientes que abanonan los servicios?
 
 <div align="center">
- <img alt ="p6-image" src="/img/p6.png" width="730" height="369"//>
+ <img alt ="p6-image" src="/img/p6.png"//>
 </div>
 
 <div align="center">
@@ -248,7 +248,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
 <div align="center">
- <img alt ="p7-image" src="/img/p7.png" width="730" height="369"//>
+ <img alt ="p7-image" src="/img/p7.png" //>
 </div>
 
 <div align="center">
@@ -276,7 +276,7 @@ Indica la correlación que hay entre todas las variables numericas de los datos 
 
 <div align="center">
  <b>Matriz de correlación segun coeficiente de Pearson</b>
- <img alt ="matriz_cor_pearson-image" src="/img/mat_corr_pearson.png" width="903" height="586"// title="Matriz de correlación segun coeficiente de Pearson">
+ <img alt ="matriz_cor_pearson-image" src="/img/mat_corr_pearson.png" // title="Matriz de correlación segun coeficiente de Pearson">
 </div>
 
 <div align="center">
@@ -300,29 +300,29 @@ Se procede a realizar graficos detallados entre las variables que poseen un mayo
 Credit limit VS avg open to buy
 -
 <div align="center">
- <img alt ="Credit Limit VS Avg Open To Buy" src="/img/CL_vs_AOTB.png" width="712" height="730"// title="Credit Limit VS Avg Open To Buy">
+ <img alt ="Credit Limit VS Avg Open To Buy" src="/img/CL_vs_AOTB.png" // title="Credit Limit VS Avg Open To Buy">
 </div>
 
 total trans amt VS total trans ct
 -
 <div align="center">
- <img alt ="Total Trans Amt VS Total Trans Ct" src="/img/TTA_vs_TTC.png" width="712" height="730"// title="Total Trans Amt VS Total Trans Ct">
+ <img alt ="Total Trans Amt VS Total Trans Ct" src="/img/TTA_vs_TTC.png"// title="Total Trans Amt VS Total Trans Ct">
 </div>
 
 Customer age VS months on book
 -
 <div align="center">
- <img alt ="Customer Age VS Months on Book" src="/img/CA_vs_MOB.png" width="712" height="730"// title="Customer Age VS Months on Book">
+ <img alt ="Customer Age VS Months on Book" src="/img/CA_vs_MOB.png" // title="Customer Age VS Months on Book">
 </div>
 
 Total revolving bal VS avg utilization ratio
 -
 <div align="center">
- <img alt ="Total Revolving Bal VS Avg Utilization Ratio" src="/img/TRB_vs_AUR.png" width="712" height="730"// title="Total Revolving Bal VS Avg Utilization Ratio">
+ <img alt ="Total Revolving Bal VS Avg Utilization Ratio" src="/img/TRB_vs_AUR.png" // title="Total Revolving Bal VS Avg Utilization Ratio">
 </div>
 
 Avg open to buy VS avg utilization ratio
 -
 <div align="center">
- <img alt ="Avg Open To Buy VS Avg Utilization Ratio" src="/img/AOTB_vs_AUR.png" width="712" height="730"// title="Avg Open To Buy VS Avg Utilization Ratio">
+ <img alt ="Avg Open To Buy VS Avg Utilization Ratio" src="/img/AOTB_vs_AUR.png" // title="Avg Open To Buy VS Avg Utilization Ratio">
 </div>
