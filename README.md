@@ -50,7 +50,7 @@ Para comenzar se parte de un analisis exploratorio de los datos, el cual puede e
 
 De ello podemos plantear diferentes Hipótesis o preguntas que se generen al hacer esta primera observacion. 
 
-### Hipótesis 1
+## Hipótesis 1
 
 H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para clientes activos y retirados
 
@@ -73,7 +73,7 @@ H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente pa
 
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana del monto total de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandonara el servicio realiza transacciones por montos menores que un cliente que seguira utilizandolo. 
 
-### Hipótesis 2
+## Hipótesis 2
 
 
 H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual** para clientes activos y retirados
