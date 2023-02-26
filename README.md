@@ -165,12 +165,34 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  <img alt ="p3-image" src="/img/p3.png" width="891" height="640"//>
 </div>
 
+<div align="center">
+ Edad promedio de clientes según target 
+
+ |Target  |Edad Promedio|
+ |--------|------------|
+ |Attrited Customer	|    46.65	| 
+ |Existing Customer	|   46.26	| 
+</div>
+
+> **Insight:** Podemos decir que las edad de los clientes que abandonan el servicio no varia con la de los clientes que siguen utilizandolo. 
+
 ## Pregunta 4
 ¿Cuanto tiempo en promedio llevan las tarjetas sin utilizar de las personas que abandonan la tarjeta de crédito?
 
 <div align="center">
  <img alt ="p4-image" src="/img/p4.png" width="891" height="640"//>
 </div>
+
+<div align="center">
+ Meses inactivos segun target
+
+ |Target  |Tiempo promedio|
+ |--------|------------|
+ |Attrited Customer	|    2.69	| 
+ |Existing Customer	|   2.27| 
+</div>
+
+> **Insight:** Podemos decir que los clientes que abandonan el servicio tienden a estar mas inactivos en la utilizacion del mismo. Si bien la diferencia no es significativa a simple vista podria ser un factor a tener en cuenta que se analizara mas adelante.  
 
 ## Pregunta 5 
 ¿Que tipo de tarjeta usan los clientes que abandonan los servicios??
@@ -179,6 +201,19 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  <img alt ="p5-image" src="/img/p5.png" width="730" height="369"//>
 </div>
 
+<div align="center">
+ Tipo de tarjeta utilizadas por clientes segun target 
+ 
+ |Card_Category|	Attrited Customer	|Existing Customer|	% Abandono |
+ |-------------|-------------------|-----------------|------------|
+ |Platinum|	5|	15|	25.00%|
+ |Gold	|21	|95	|18.10%|
+ |Blue	|1519	|7917|	16.09%|
+ |Silver	|82	|473	|14.77%|
+</div>
+ 
+ > **Insight:** Podemos observar que los clientes con categoria *Platinum* son los que mas abandonan el servicio con un 25%. Esto debera ser analizado mas adelante, pero podria indicar que los clientes con tarjetas de mayor categoria no estan contentos por los beneficios brindados por las mismas. 
+
 ## Pregunta 6 
 ¿Que nivel de educacion tienen los clientes que abanonan los servicios?
 
@@ -186,9 +221,41 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  <img alt ="p6-image" src="/img/p6.png" width="730" height="369"//>
 </div>
 
+<div align="center">
+ Nivel educacional de los clientes según target
+
+ |Education_Level|	Attrited Customer|	Existing Customer|	% Abandono|
+ |---------------|------------------|------------------|-----------|			
+ |Doctorate	|95|	356|	21.06%|
+ |Post-Graduate	|92	|424	|17.82%|
+ |Unknown	|256	|1263|	16.85%|
+ |Uneducated	|237	|1250|	15.93%|
+ |Graduate	|487	|2641|	15.56%|
+ |College	|154	|859	|15.20%|
+ |High School	|306	|1707	|15.20%|
+ </div>
+ 
+ > **Insight:** Dentro de los diferentes niveles, podemos observar que los clientes que poseen un nivel *Doctorate* tienen la mayor deserción, con un 21,06%. 
+
 ## Pregunta 7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
 <div align="center">
  <img alt ="p7-image" src="/img/p7.png" width="730" height="369"//>
 </div>
+
+<div align="center">
+ Nivel educacional de los clientes según target
+
+ |Income_Category|	Attrited Customer|	Existing Customer|	% Abandono|
+ |---------------|------------------|------------------|-----------|			
+ |$120K +	|126	|601	|17.33% |
+ |Less than $40K	|612	|2949	|17.18%|
+ |Unknown	|187	|925	|16.81%|
+ |80𝐾 − 120K|242|	1293	|15.76%|
+ |40𝐾 − 60K	|271	|1519	|15.13%|
+ |60𝐾 − 80K	|189	|1213	|13.48%|
+ </div>
+ 
+ > **Insight:** Dentro de las diferentes categorias de ingreso, podemos ver que la que mayor deserción posee es la de mayor nivel de ingresos *$120K+*. Esto debera analizarse para ver si los beneficios que brinda el servicio para este tipo de clientes no es suficiente.  
+
