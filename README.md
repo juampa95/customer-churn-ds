@@ -51,6 +51,7 @@ Para comenzar se parte de un analisis exploratorio de los datos, el cual puede e
 De ello podemos plantear diferentes Hipótesis o preguntas que se generen al hacer esta primera observacion. 
 
 ### Hipótesis 1
+
 H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para clientes activos y retirados
 
 H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente para clientes activos y retirados
