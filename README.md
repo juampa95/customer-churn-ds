@@ -38,19 +38,25 @@ Utilizaremos un dataset brindando por un banco anonimo, con datos de su cartera 
 
 El Gerente comercial de un banco se encuentra frente a un listado de clientes que utilizan el servicio de tarjetas de crédito y detecta una alta taza de abandono de los mismos. Quieren analizar los datos para descubrir la razón detrás de esto y aprovechar lo mismo para predecir los clientes que probablemente abandonarán para poder tomar medidas sobre esto.
   
-# 3- Problema comercial
+# 3-Problema comercial
 
 El banco buscara reducir este abandono de clientes, pero para ello debera actuar sobre el grupo correcto de personas, ya sea a travez de campañas pubilicitarias o ofreciendo algun tipo de beneficio. Por ello es importante determinar de manera efectiva que clientes podrian llegar a dejar de usar los servicios. 
 
 Tomar estas medidas con clientes que no tengan una predisposicion a abandonar el servicio podria incurrir en una reduccion de beneficios o en "molestar" mediante campañas publicitarias a clientes fidelizados. 
 
----
+# 4-Glosario 
+
+Para entender correctamente que quieren decirnos los datos es necesario saber que quieren decirnos las variables a analizar. Para ello, podemos ingresar al siguiente glosario haciendo click [`AQUI`](glosario.md)
+
+# 5-Análisis Exploratorio de Datos (EDA)
 
 Para comenzar se parte de un analisis exploratorio de los datos, el cual puede encontrarse en este [`notebook`](EDA.ipynb). En el mismo damos un primer vistazo a nuestros datos para intentar detectar patrones o estructuras en la informacion de manera visual. 
 
-De ello podemos plantear diferentes Hipótesis o preguntas que se generen al hacer esta primera observacion. 
+De ello podemos plantear diferentes Hipótesis o preguntas que se generen al hacer esta primera observacion.
 
-## Hipótesis 1
+## Hipótesis y preguntas
+
+### Hipótesis 1
 
 H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para clientes activos y retirados
 
@@ -73,7 +79,7 @@ H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente pa
 
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana del monto total de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandonara el servicio realiza transacciones por montos menores que un cliente que seguira utilizandolo. 
 
-## Hipótesis 2
+### Hipótesis 2
 
 
 H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual** para clientes activos y retirados
@@ -98,7 +104,7 @@ H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **difere
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana de la cantidad total de transacciones es diferente según el target"*. Este analisis demostraria que el cliente que abandona el servicio hará una menor cantidad de transacciones que las que hace un cliente que seguira utilizandolo. 
 
 
-## Hipótesis 3
+### Hipótesis 3
 
 H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual** para clientes activos y retirados 
 
@@ -121,7 +127,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana de variacion en cantidad de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandona el servicio reduce casi en un 50% las transacciones que hace a final del periodo comparado con las que hace al inicio del periodo. El cliente que sigue utilizando el servicio tambien reduce esta cantida con respecto al inicio el perioo pero solo en un 25%
 
-## Pregunta 1
+### Pregunta 1
  ¿Cúal es el género que más abandona la tarjeta de crédito?
  
 <div align="center">
@@ -139,7 +145,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos decir que las cantidades que abandonan segun genero no son tan diferentes. Pero hay un 3% mas de mujeres que abanbdonan el servicio.
 
-## Pregunta 2
+### Pregunta 2
  Los que abandonan la tarjeta de crédito, ¿Cúal es su estado civil?
  
 <div align="center">
@@ -159,7 +165,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** No se puede detectar ningun patrón de abandono en cuanto al estado civil de los clientes. Las variaciones son menores al 1%. El estado civil NO influye en la deserción. 
 
-## Pregunta 3
+### Pregunta 3
  ¿Que edades promedio tienen las personas que abandonan las tarjetas de crédito?
  
 <div align="center">
@@ -177,7 +183,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos decir que las edad de los clientes que abandonan el servicio no varia con la de los clientes que siguen utilizandolo. 
 
-## Pregunta 4
+### Pregunta 4
 ¿Cuanto tiempo en promedio llevan las tarjetas sin utilizar de las personas que abandonan la tarjeta de crédito?
 
 <div align="center">
@@ -195,7 +201,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos decir que los clientes que abandonan el servicio tienden a estar mas inactivos en la utilizacion del mismo. Si bien la diferencia no es significativa a simple vista podria ser un factor a tener en cuenta que se analizara mas adelante.  
 
-## Pregunta 5 
+### Pregunta 5 
 ¿Que tipo de tarjeta usan los clientes que abandonan los servicios??
 
 <div align="center">
@@ -215,7 +221,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  
  > **Insight:** Podemos observar que los clientes con categoria *Platinum* son los que mas abandonan el servicio con un 25%. Esto debera ser analizado mas adelante, pero podria indicar que los clientes con tarjetas de mayor categoria no estan contentos por los beneficios brindados por las mismas. 
 
-## Pregunta 6 
+### Pregunta 6 
 ¿Que nivel de educacion tienen los clientes que abanonan los servicios?
 
 <div align="center">
@@ -238,7 +244,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  
  > **Insight:** Dentro de los diferentes niveles, podemos observar que los clientes que poseen un nivel *Doctorate* tienen la mayor deserción, con un 21,06%. 
 
-## Pregunta 7
+### Pregunta 7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
 <div align="center">
@@ -259,4 +265,34 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  </div>
  
  > **Insight:** Dentro de las diferentes categorias de ingreso, podemos ver que la que mayor deserción posee es la de mayor nivel de ingresos *$120K+*. Esto debera analizarse para ver si los beneficios que brinda el servicio para este tipo de clientes no es suficiente.  
+
+## Análisis Multivariado
+
+Con los gráficos anterior pudimos obtener algunos Insights que surgieron de hacer un análisis univariado y bivariado. A continuación profundizaremos en esto haciendo observaciones mas complejas de manera multivariada.
+
+### Matríz de correlación
+Indica la correlación que hay entre todas las variables numericas de los datos que estamos trabajando 
+
+<div align="center">
+ **Matriz de correlación segun coeficiente de Pearson**
+ 
+ <img alt ="matriz_cor_pearson-image" src="/mat_corr_pearson.png" width="903" height="586"//>
+ 
+ **TOP 5 VARIABLES CON MAYOR CORRELACIÓN**
+ 
+ |Variable 1 | Variable 2 | Coef.Pearson | 
+ |------------------|-----------------------|-----------|
+ |Credit_Limit         |Avg_Open_To_Buy         | 0.995981
+ |Total_Trans_Amt      |Total_Trans_Ct          | 0.807192
+ |Customer_Age         |Months_on_book          | 0.788912
+ |Total_Revolving_Bal  |Avg_Utilization_Ratio   | 0.624022
+ |Avg_Open_To_Buy      |Avg_Utilization_Ratio   | 0.538808
+</div>
+
+
+
+>Nota: En ella podemos observar las variables de mayor correlacion en colores azul mas oscuro. Podemos detectar muy pocas variables que poseen una correlación. Tambien se hizo el análisis con correlaciones de kendall y spearman para ver si se observaba alguna diferencia. Pero las variables con mayor correlación son las mismas. Para ver las matrices de corrleación con otros coeficientes podemos verlas desde aquí [`Kendall`](mat_corr_kendall.png) Y [`Spearman`](mat_corr_spearman.png)
+
+
+
 
