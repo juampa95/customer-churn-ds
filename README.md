@@ -127,12 +127,36 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  <img alt ="p1-image" src="/img/p1.png" width="730" height="369"//>
 </div>
 
+<div align="center">
+ Abandono del servicio segun genero 
+
+ |Genero  |Attrited Customer|	Existing Customer	|% Abandono|
+ |--------|------------|--------|--------|
+ |F	|   930	|  4428	 |  17.35%  |
+ |M	|   697	|  4072 	|  14.61%  |
+</div>
+
+> **Insight:** Podemos decir que las cantidades que abandonan segun genero no son tan diferentes. Pero hay un 3% mas de mujeres que abanbdonan el servicio.
+
 ## Pregunta 2
  Los que abandonan la tarjeta de crédito, ¿Cúal es su estado civil?
  
 <div align="center">
  <img alt ="p2-image" src="/img/p2.png" width="730" height="369"//>
 </div>
+
+<div align="center">
+ Abandono del servicio segun estado civil 
+
+ |Estado civil  |Attrited Customer|	Existing Customer	|% Abandono|
+ |--------|------------|--------|--------|
+ | Unknown	| 129	|620	 |17.22%
+ | Single	 | 668	|3275	|16.94%
+ | Divorced| 121	|627	 |16.17%
+ | Married	| 709	|3978	|15.12%
+</div>
+
+> **Insight:** No se puede detectar ningun patrón de abandono en cuanto al estado civil de los clientes. Las variaciones son menores al 1%. El estado civil NO influye en la deserción. 
 
 ## Pregunta 3
  ¿Que edades promedio tienen las personas que abandonan las tarjetas de crédito?
