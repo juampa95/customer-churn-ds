@@ -295,6 +295,34 @@ Indica la correlación que hay entre todas las variables numericas de los datos 
 
 >Nota: En ella podemos observar las variables de mayor correlacion en colores azul mas oscuro. Podemos detectar muy pocas variables que poseen una correlación. Tambien se hizo el análisis con correlaciones de kendall y spearman para ver si se observaba alguna diferencia. Pero las variables con mayor correlación son las mismas. Para ver las matrices de corrleación con otros coeficientes podemos verlas desde aquí [`Kendall`](img/mat_corr_kendall.png) Y [`Spearman`](img/mat_corr_spearman.png)
 
+Se procede a realizar graficos detallados entre las variables que poseen un mayor coeficiente de correlación para ver si es posible obtener Insight visualmente.
 
+Credit limit VS avg open to buy
+-
+<div align="center">
+ <img alt ="Credit Limit VS Avg Open To Buy" src="/img/CL_vs_AOTB.png" width="712" height="730"// title="Credit Limit VS Avg Open To Buy">
+</div>
 
+total trans amt VS total trans ct
+-
+<div align="center">
+ <img alt ="Total Trans Amt VS Total Trans Ct" src="/img/TTA_vs_TTC.png" width="712" height="730"// title="Total Trans Amt VS Total Trans Ct">
+</div>
 
+Customer age VS months on book
+-
+<div align="center">
+ <img alt ="Customer Age VS Months on Book" src="/img/CA_vs_MOB.png" width="712" height="730"// title="Customer Age VS Months on Book">
+</div>
+
+Total revolving bal VS avg utilization ratio
+-
+<div align="center">
+ <img alt ="Total Revolving Bal VS Avg Utilization Ratio" src="/img/TRB_vs_AUR.png" width="712" height="730"// title="Total Revolving Bal VS Avg Utilization Ratio">
+</div>
+
+Avg open to buy VS avg utilization ratio
+-
+<div align="center">
+ <img alt ="Avg Open To Buy VS Avg Utilization Ratio" src="/img/AOTB_vs_AUR.png" width="712" height="730"// title="Avg Open To Buy VS Avg Utilization Ratio">
+</div>
