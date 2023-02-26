@@ -40,6 +40,16 @@ El Gerente comercial de un banco se encuentra frente a un listado de clientes qu
   
 # 3- Problema comercial
 
+El banco buscara reducir este abandono de clientes, pero para ello debera actuar sobre el grupo correcto de personas, ya sea a travez de campañas pubilicitarias o ofreciendo algun tipo de beneficio. Por ello es importante determinar de manera efectiva que clientes podrian llegar a dejar de usar los servicios. 
+
+Tomar estas medidas con clientes que no tengan una predisposicion a abandonar el servicio podria incurrir en una reduccion de beneficios o en "molestar" mediante campañas publicitarias a clientes fidelizados. 
+
+---
+
+Para comenzar se parte de un analisis exploratorio de los datos, el cual puede encontrarse en este [`notebook`](EDA.ipynb). En el mismo damos un primer vistazo a nuestros datos para intentar detectar patrones o estructuras en la informacion de manera visual. 
+
+De ello podemos plantear diferentes Hipótesis o preguntas que se generen al hacer esta primera observacion. 
+
 ### Hipótesis 1
 H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para clientes activos y retirados
 
@@ -48,6 +58,19 @@ H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente pa
 <div align="center">
  <img alt ="h1-image" src="/img/h1.png" width="949" height="604"//>
 </div>
+
+*Nota: Como la variable presenta una gran cantidad de Outliers, el valor mas representativo pasa a ser la mediana*
+
+<div align="center">
+ Mediana de monto total de transacciones
+
+ |Attrition_Flag    | Mediana    |
+ |------------------|------------|
+ |Attrited Customer | 2329     |
+ |Existing Customer | 4100    |
+</div>
+
+> **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana del monto total de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandonara el servicio realiza transacciones por montos menores que un cliente que seguira utilizandolo. 
 
 ### Hipótesis 2
 
@@ -60,6 +83,20 @@ H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **difere
  <img alt ="h2-image" src="/img/h2.png" width="949" height="604"//>
 </div>
 
+*Nota: Como la variable presenta una gran cantidad de Outliers, el valor mas representativo pasa a ser la mediana*
+
+<div align="center">
+ Mediana de cantidad total de transacciones
+
+ |Attrition_Flag    | Mediana    |
+ |------------------|------------|
+ |Attrited Customer | 43     |
+ |Existing Customer | 71     |
+</div>
+
+> **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana de la cantidad total de transacciones es diferente según el target"*. Este analisis demostraria que el cliente que abandona el servicio hará una menor cantidad de transacciones que las que hace un cliente que seguira utilizandolo. 
+
+
 ## Hipótesis 3
 
 H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual** para clientes activos y retirados 
@@ -69,6 +106,19 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 <div align="center">
  <img alt ="h3-image" src="/img/h3.png" width="949" height="604"//>
 </div>
+
+*Nota: Como la variable presenta una gran cantidad de Outliers, el valor mas representativo pasa a ser la mediana*
+
+<div align="center">
+ Mediana de variacion en cantidad de transacciones 
+
+ |Attrition_Flag    | Mediana    |
+ |------------------|------------|
+ |Attrited Customer | 55.43 %    |
+ |Existing Customer | 74.24 %    |
+</div>
+
+> **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana de variacion en cantidad de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandona el servicio reduce casi en un 50% las transacciones que hace a final del periodo comparado con las que hace al inicio del periodo. El cliente que sigue utilizando el servicio tambien reduce esta cantida con respecto al inicio el perioo pero solo en un 25%
 
 ## Pregunta 1
  ¿Cúal es el género que más abandona la tarjeta de crédito?
