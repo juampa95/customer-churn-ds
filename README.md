@@ -81,7 +81,6 @@ H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente pa
 
 ### Hipótesis 2
 
-
 H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual** para clientes activos y retirados
 
 H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **diferente** para clientes activos y retirados
@@ -246,6 +245,8 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 ### Pregunta 7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
+
+[Link](./hip_preg.md###Pregunta_7)
 
 <div align="center">
  <img alt ="p7-image" src="/img/p7.png" //>
