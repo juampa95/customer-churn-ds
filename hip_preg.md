@@ -1,4 +1,4 @@
-### Hipótesis 1
+# Hipótesis 1
 
 H1 = La media del monto total de transacciones (Total_Trans_Amt) es igual para clientes activos y retirados
 
@@ -21,7 +21,7 @@ H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente pa
 
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana del monto total de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandonara el servicio realiza transacciones por montos menores que un cliente que seguira utilizandolo. 
 
-### Hipotesis_2
+# Hipotesis_2
 
 
 H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual** para clientes activos y retirados
@@ -46,7 +46,7 @@ H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **difere
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana de la cantidad total de transacciones es diferente según el target"*. Este analisis demostraria que el cliente que abandona el servicio hará una menor cantidad de transacciones que las que hace un cliente que seguira utilizandolo. 
 
 
-### Hipótesis 3
+# Hipótesis 3
 
 H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual** para clientes activos y retirados 
 
@@ -69,7 +69,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana de variacion en cantidad de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandona el servicio reduce casi en un 50% las transacciones que hace a final del periodo comparado con las que hace al inicio del periodo. El cliente que sigue utilizando el servicio tambien reduce esta cantida con respecto al inicio el perioo pero solo en un 25%
 
-### Pregunta 1
+# Pregunta 1
  ¿Cúal es el género que más abandona la tarjeta de crédito?
  
 <div align="center">
@@ -87,7 +87,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos decir que las cantidades que abandonan segun genero no son tan diferentes. Pero hay un 3% mas de mujeres que abanbdonan el servicio.
 
-### Pregunta 2
+# Pregunta 2
  Los que abandonan la tarjeta de crédito, ¿Cúal es su estado civil?
  
 <div align="center">
@@ -107,7 +107,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** No se puede detectar ningun patrón de abandono en cuanto al estado civil de los clientes. Las variaciones son menores al 1%. El estado civil NO influye en la deserción. 
 
-### Pregunta 3
+# Pregunta 3
  ¿Que edades promedio tienen las personas que abandonan las tarjetas de crédito?
  
 <div align="center">
@@ -125,7 +125,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos decir que las edad de los clientes que abandonan el servicio no varia con la de los clientes que siguen utilizandolo. 
 
-### Pregunta 4
+# Pregunta 4
 ¿Cuanto tiempo en promedio llevan las tarjetas sin utilizar de las personas que abandonan la tarjeta de crédito?
 
 <div align="center">
@@ -143,7 +143,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 > **Insight:** Podemos decir que los clientes que abandonan el servicio tienden a estar mas inactivos en la utilizacion del mismo. Si bien la diferencia no es significativa a simple vista podria ser un factor a tener en cuenta que se analizara mas adelante.  
 
-### Pregunta 5 
+# Pregunta 5 
 ¿Que tipo de tarjeta usan los clientes que abandonan los servicios??
 
 <div align="center">
@@ -163,7 +163,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  
  > **Insight:** Podemos observar que los clientes con categoria *Platinum* son los que mas abandonan el servicio con un 25%. Esto debera ser analizado mas adelante, pero podria indicar que los clientes con tarjetas de mayor categoria no estan contentos por los beneficios brindados por las mismas. 
 
-### Pregunta-6
+# Pregunta-6
 ¿Que nivel de educacion tienen los clientes que abanonan los servicios?
 
 <div align="center">
@@ -186,7 +186,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  
  > **Insight:** Dentro de los diferentes niveles, podemos observar que los clientes que poseen un nivel *Doctorate* tienen la mayor deserción, con un 21,06%. 
 
-### Pregunta_7
+# Pregunta_7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
 <div align="center">
