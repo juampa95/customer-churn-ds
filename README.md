@@ -246,7 +246,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ### Pregunta 7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
-[Link](./hip_preg.md###Pregunta_7)
+[Link](./hip_preg.md###_Pregunta_6)
 
 <div align="center">
  <img alt ="p7-image" src="/img/p7.png" //>
