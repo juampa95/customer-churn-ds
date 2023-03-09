@@ -85,6 +85,8 @@ H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual*
 
 H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **diferente** para clientes activos y retirados
 
+[Respuesta Detallada](./hip_preg.md#Hipotesis-2)
+
 <div align="center">
  <img alt ="h2-image" src="/img/h2.png"//>
 </div>
@@ -108,6 +110,8 @@ H0 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **difere
 H3 = La media de la variacion en cantidad de transacciones Q4 -Q1 (1) es **igual** para clientes activos y retirados 
 
 H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng_Q4_Q1) es **diferente** para clientes activos y retirados
+
+[Respuesta Detallada](./hip_preg.md#Hipotesis-3)
 
 <div align="center">
  <img alt ="h3-image" src="/img/h3.png" //>
@@ -147,6 +151,8 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ### Pregunta 2
  Los que abandonan la tarjeta de crédito, ¿Cúal es su estado civil?
  
+ [Respuesta Detallada](./hip_preg.md#Pregunta-2)
+ 
 <div align="center">
  <img alt ="p2-image" src="/img/p2.png" //>
 </div>
@@ -167,6 +173,8 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ### Pregunta 3
  ¿Que edades promedio tienen las personas que abandonan las tarjetas de crédito?
  
+ [Respuesta Detallada](./hip_preg.md#Pregunta-3)
+ 
 <div align="center">
  <img alt ="p3-image" src="/img/p3.png" //>
 </div>
@@ -185,6 +193,8 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ### Pregunta 4
 ¿Cuanto tiempo en promedio llevan las tarjetas sin utilizar de las personas que abandonan la tarjeta de crédito?
 
+[Respuesta Detallada](./hip_preg.md#Pregunta-4)
+
 <div align="center">
  <img alt ="p4-image" src="/img/p4.png" //>
 </div>
@@ -202,6 +212,8 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 ### Pregunta 5 
 ¿Que tipo de tarjeta usan los clientes que abandonan los servicios??
+
+[Respuesta Detallada](./hip_preg.md#Pregunta-5)
 
 <div align="center">
  <img alt ="p5-image" src="/img/p5.png"//>
@@ -222,6 +234,8 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 
 ### Pregunta 6 
 ¿Que nivel de educacion tienen los clientes que abanonan los servicios?
+
+[Respuesta Detallada](./hip_preg.md#Pregunta-6)
 
 <div align="center">
  <img alt ="p6-image" src="/img/p6.png"//>
@@ -246,7 +260,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ### Pregunta 7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
-[Link](./hip_preg.md###_Pregunta_6)
+[Respuesta Detallada](./hip_preg.md#Pregunta-7)
 
 <div align="center">
  <img alt ="p7-image" src="/img/p7.png" //>
