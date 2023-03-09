@@ -163,7 +163,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  
  > **Insight:** Podemos observar que los clientes con categoria *Platinum* son los que mas abandonan el servicio con un 25%. Esto debera ser analizado mas adelante, pero podria indicar que los clientes con tarjetas de mayor categoria no estan contentos por los beneficios brindados por las mismas. 
 
-### Pregunta 6 
+### Pregunta-6
 ¿Que nivel de educacion tienen los clientes que abanonan los servicios?
 
 <div align="center">
