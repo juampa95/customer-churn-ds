@@ -21,7 +21,7 @@ H0 = La media del monto total de transacciones (Total_Trans_Amt) es diferente pa
 
 > **Insight:** Podemos validar la hipotesis H0 diciendo que *"La mediana del monto total de transacciones es diferente según el target"*. Esto quiere decir que un cliente que abandonara el servicio realiza transacciones por montos menores que un cliente que seguira utilizandolo. 
 
-### Hipótesis 2
+### Hipotesis_2
 
 
 H2 = La media de la cantidad total de transacciones (Total_Trans_Ct) es **igual** para clientes activos y retirados
@@ -186,7 +186,7 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
  
  > **Insight:** Dentro de los diferentes niveles, podemos observar que los clientes que poseen un nivel *Doctorate* tienen la mayor deserción, con un 21,06%. 
 
-### Pregunta 7
+### Pregunta_7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
 <div align="center">
