@@ -196,6 +196,12 @@ Credit limit VS avg open to buy
  <img alt ="Credit Limit VS Avg Open To Buy" src="/img/CL_vs_AOTB.png" // title="Credit Limit VS Avg Open To Buy">
 </div>
 
+Podemos observar que existe una correlacion casi perfecta entre estas dos variables. Y esto es de esperarse debido a la naturaleza de las mismas. 
+
+El AVG Open tu Buy representa cuanto puede comprar una persona sin tener problemas crediticios, por lo que mientras mayor sea el limite de credito que posea, mayor sera el AVG open to buy. 
+
+>Nota: Se considerara la posibildiad de quitar una de estas columnas para no tener dos tipos de datos que indiquen lo mismo. 
+
 total trans amt VS total trans ct
 -
 <div align="center">
