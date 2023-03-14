@@ -239,6 +239,9 @@ Los modelos elegidos para comenzar con esta etapa fueron 3 de los mas conocidos.
 
 Este resultado ofrecio resulados interesantes, considerando que el tuneo de hiperparametros fue nulo.
 
+<div align="center">
+ <img alt ="Matriz de confusion Logistic Regression" src="/img/matriz_reg_log.png" // title="Matriz de confusion Logistic Regression">
+
 |            |  precision |   recall   |  f1-score  | support  |
 |------------|------------|------------|------------|----------|
 |Existing Customer|      0.90  |    0.97    |  0.94      | 1701 |
@@ -247,14 +250,15 @@ Este resultado ofrecio resulados interesantes, considerando que el tuneo de hipe
 |   macro avg|       0.82 |     0.71   |   0.75     | 2026 |
 |weighted avg|       0.88 |     0.89   |   0.88     | 2026 |
 
-<div align="center">
- <img alt ="Matriz de confusion Logistic Regression" src="/img/matriz_reg_log.png" // title="Matriz de confusion Logistic Regression">
+
 </div>
 
 ## KNN
 
 A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que no se realizo ningun tipo de optimizacion de hiperparametros 
 
+<div align="center">
+ <img alt ="Matriz de confusion KNN" src="/img/matriz_KNN.png" // title="Matriz de confusion KNN">
 
 |            |  precision |   recall   |  f1-score  | support  |
 |------------|------------|------------|------------|----------|
@@ -263,14 +267,16 @@ A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que
 |    accuracy|            |            |  0.90      | 2026 |
 |   macro avg|       0.83 |     0.76   |   0.78     | 2026 |
 |weighted avg|       0.89 |     0.90   |   0.89     | 2026 |
-
-<div align="center">
- <img alt ="Matriz de confusion KNN" src="/img/matriz_KNN.png" // title="Matriz de confusion KNN">
 </div>
+
 
 ## Random Forest Classifier
 
 De los tres modelos probados, este fue el que mejor resultado arrojo sin necesidad de tunear demasiado los hiperparametros. 
+
+
+<div align="center">
+ <img alt ="Matriz de confusion RFC" src="/img/matriz_RFC.png" // title="Matriz de confusion RFC">
 
 |            |  precision |   recall   |  f1-score  | support  |
 |------------|------------|------------|------------|----------|
@@ -280,7 +286,5 @@ De los tres modelos probados, este fue el que mejor resultado arrojo sin necesid
 |   macro avg|       0.91 |     0.76   |   0.81     | 2026 |
 |weighted avg|       0.92 |     0.92   |   0.91     | 2026 |
 
-<div align="center">
- <img alt ="Matriz de confusion RFC" src="/img/matriz_RFC.png" // title="Matriz de confusion RFC">
 </div>
 
