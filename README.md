@@ -225,3 +225,62 @@ Avg open to buy VS avg utilization ratio
 <div align="center">
  <img alt ="Avg Open To Buy VS Avg Utilization Ratio" src="/img/AOTB_vs_AUR.png" // title="Avg Open To Buy VS Avg Utilization Ratio">
 </div>
+
+
+# 6-Prueba de modelos
+
+Antes de comenzar a probar y analizar los resultados obtenidos con diferentes modelos, fue necesario hacer algunas transformaciones de los datos. Para lo que se utilizo Ordinal Encoder y One Hot Encoder con el objetivo de convertir las variables categoricas en variables numericas. De esta forma fue posible utilizarlas en cualquier tipo de modelo. 
+
+En esta etapa se obtienen resultados de manera rapida y sencilla con distintos modelos, mediante la minima o nula optimizacion de hiperparametros.
+
+Los modelos elegidos para comenzar con esta etapa fueron 3 de los mas conocidos. Logistic Regression, KNN y Random Forest Classifier.
+
+## Logistic Regression
+
+Este resultado ofrecio resulados interesantes, considerando que el tuneo de hiperparametros fue nulo.
+
+|            |  precision |   recall   |  f1-score  | support  |
+|------------|------------|------------|------------|----------|
+|Existing Customer|      0.90  |    0.97    |  0.94      | 1701 |
+|Attrited Customer|      0.74  |    0.45    |  0.56      | 325  |
+|    accuracy|            |            |  0.89      | 2026 |
+|   macro avg|       0.82 |     0.71   |   0.75     | 2026 |
+|weighted avg|       0.88 |     0.89   |   0.88     | 2026 |
+
+<div align="center">
+ <img alt ="Matriz de confusion Logistic Regression" src="/img/matriz_reg_log.png" // title="Matriz de confusion Logistic Regression">
+</div>
+
+## KNN
+
+A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que no se realizo ningun tipo de optimizacion de hiperparametros 
+
+
+|            |  precision |   recall   |  f1-score  | support  |
+|------------|------------|------------|------------|----------|
+|Existing Customer|      0.92  |    0.96    |  0.94      | 1701 |
+|Attrited Customer|      0.74  |    0.55    |  0.63      | 325  |
+|    accuracy|            |            |  0.90      | 2026 |
+|   macro avg|       0.83 |     0.76   |   0.78     | 2026 |
+|weighted avg|       0.89 |     0.90   |   0.89     | 2026 |
+
+<div align="center">
+ <img alt ="Matriz de confusion KNN" src="/img/matriz_KNN.png" // title="Matriz de confusion KNN">
+</div>
+
+## Random Forest Classifier
+
+De los tres modelos probados, este fue el que mejor resultado arrojo sin necesidad de tunear demasiado los hiperparametros. 
+
+|            |  precision |   recall   |  f1-score  | support  |
+|------------|------------|------------|------------|----------|
+|Existing Customer|      0.92  |    0.99    |  0.95      | 1701 |
+|Attrited Customer|      0.91  |    0.54    |  0.68      | 325  |
+|    accuracy|            |            |  0.92      | 2026 |
+|   macro avg|       0.91 |     0.76   |   0.81     | 2026 |
+|weighted avg|       0.92 |     0.92   |   0.91     | 2026 |
+
+<div align="center">
+ <img alt ="Matriz de confusion RFC" src="/img/matriz_RFC.png" // title="Matriz de confusion RFC">
+</div>
+
