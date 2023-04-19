@@ -402,3 +402,9 @@ Para ello fue necesario lo siguiente:
 - No reducir su dimensionalidad
 - Tunear sus hiperparametros con max_depth=28, n_estimators=633, criterion = 'gini', random_state=0
 
+Podemos observar la matriz de confusión del modelo final para corroborar el buen desempeño del mismo. 
+
+<div align="center">
+ <img alt ="Matriz de confusion Final" src="/img/matriz_final.png" // title="Matriz de confusion Final">
+
+</div>
