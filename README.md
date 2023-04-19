@@ -198,7 +198,7 @@ Credit limit VS avg open to buy
 
 Podemos observar que existe una correlacion casi perfecta entre estas dos variables. Y esto es de esperarse debido a la naturaleza de las mismas. 
 
-El AVG Open tu Buy representa cuanto puede comprar una persona sin tener problemas crediticios, por lo que mientras mayor sea el limite de credito que posea, mayor sera el AVG open to buy. 
+El AVG Open to Buy representa cuanto puede comprar una persona sin tener problemas crediticios, por lo que mientras mayor sea el limite de credito que posea, mayor sera el AVG open to buy. 
 
 >Nota: Se considerara la posibildiad de quitar una de estas columnas para no tener dos tipos de datos que indiquen lo mismo. 
 
@@ -208,83 +208,197 @@ total trans amt VS total trans ct
  <img alt ="Total Trans Amt VS Total Trans Ct" src="/img/TTA_vs_TTC.png"// title="Total Trans Amt VS Total Trans Ct">
 </div>
 
-Customer age VS months on book
--
-<div align="center">
- <img alt ="Customer Age VS Months on Book" src="/img/CA_vs_MOB.png" // title="Customer Age VS Months on Book">
-</div>
-
-Total revolving bal VS avg utilization ratio
--
-<div align="center">
- <img alt ="Total Revolving Bal VS Avg Utilization Ratio" src="/img/TRB_vs_AUR.png" // title="Total Revolving Bal VS Avg Utilization Ratio">
-</div>
-
-Avg open to buy VS avg utilization ratio
--
-<div align="center">
- <img alt ="Avg Open To Buy VS Avg Utilization Ratio" src="/img/AOTB_vs_AUR.png" // title="Avg Open To Buy VS Avg Utilization Ratio">
-</div>
-
+Si bien estas variables poseen una correlación de mas de un 0.8 ya no tienen un comportamiento tan marcado como el caso anterior. Pero es interesante ver que la mayoria de las transacciones se encuentran en montos menores a 6000 para ambos targets.
 
 # 6-Prueba de modelos
 
-Antes de comenzar a probar y analizar los resultados obtenidos con diferentes modelos, fue necesario hacer algunas transformaciones de los datos. Para lo que se utilizo Ordinal Encoder y One Hot Encoder con el objetivo de convertir las variables categoricas en variables numericas. De esta forma fue posible utilizarlas en cualquier tipo de modelo. 
+Antes de comenzar a probar y analizar los resultados obtenidos con diferentes modelos, fue necesario hacer algunas transformaciones de los datos. Para lo que se utilizaron diferentes métodos por medio de pipelines con el fin de transformar los datos de diferentes formas y realizar pruebas para ver si esto meejoraba el rendimiento de los modelos. 
 
-En esta etapa se obtienen resultados de manera rapida y sencilla con distintos modelos, mediante la minima o nula optimizacion de hiperparametros.
+En el notebook de este [`LINK`](Modelos.ipynb) podemos encontrar el detalle de estos pipelines, pero a continuacion podran ver una tabla de que conjuntos se crearon y que se hizo en cada uno.
 
-Los modelos elegidos para comenzar con esta etapa fueron 3 de los mas conocidos. Logistic Regression, KNN y Random Forest Classifier.
+<div align="center">
 
-## Logistic Regression
+| Pipeline |  Transformaciones | Conjunto train |  Conjunto test | conjunto |
+|----------|-------------------|----------------|----------------| ---------|
+| preprocess | OHE + Ordinalencoder(con MinMaxScaler) | X_train_enc | X_test_enc | enc | 
+| preprocess1 | OHE (drop = 'first') | X_train_enc1 | X_test_enc2 | enc 1 | 
+| preprocess2 | OHE, OrdinalEncoder y resto numerico MinMaXScaler | X_train_enc2 | X_test_enc2 | enc2 | 
+| preprocess3 | OHE (sin drop = 'first') quitando columnas correlacionadas | X_train_enc3 | X_test_enc3| enc3 | 
 
-Este resultado ofrecio resulados interesantes, considerando que el tuneo de hiperparametros fue nulo.
+</div>
+
+Por ultimo transformamos los datos del conjunto "Y" para que las categorias esten representadas por 1 y 0 segun el target que nos interesa detectar
+
+<div align="center">
+
+| Target | Código | 
+|--------|--------|
+|Attrited Customer | 1 | 
+| Existing Customer | 0 |
+
+</div>
+
+Una vez transformados los datos, comenzamos con el entrenamiento de modelos. En esta etapa se obtienen resultados de manera rapida y sencilla con distintos modelos, mediante la minima o nula modificacion de hiperparametros. A estos modelos les llamamos MODELOS BASE
+
+Para poder evaluar los modelos se eligió una metrica especifica en fucnion del problema. Esta fue ROC_AUC. Mediante ella, se evalua y compara la performance de los distintos modelos. Logistic Regression, KNN y Random Forest Classifier.
+
+## Modelos base
+
+### Logistic Regression
+
+Este modelo ofrecio resulados interesantes, considerando que el tuneo de hiperparametros fue nulo. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
+
+<div align="center">
+
+| Datos usados|	ROC_AUC|
+|-------------|--------|
+| enc1 |	0.712 | 
+| enc	| 0.710 |
+| enc2	| 0.706 | 
+| enc3	| 0.659 |
+
+</div>
 
 <div align="center">
  <img alt ="Matriz de confusion Logistic Regression" src="/img/matriz_reg_log.png" // title="Matriz de confusion Logistic Regression">
 
-|            |  precision |   recall   |  f1-score  | support  |
-|------------|------------|------------|------------|----------|
-|Existing Customer|      0.90  |    0.97    |  0.94      | 1701 |
-|Attrited Customer|      0.74  |    0.45    |  0.56      | 325  |
-|    accuracy|            |            |  0.89      | 2026 |
-|   macro avg|       0.82 |     0.71   |   0.75     | 2026 |
-|weighted avg|       0.88 |     0.89   |   0.88     | 2026 |
-
-
 </div>
 
-## KNN
+### KNeighborsClassifier
 
-A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que no se realizo ningun tipo de optimizacion de hiperparametros 
+A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que no se realizo ningun tipo de optimizacion de hiperparametros. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
+
+<div align="center">
+
+| Datos usados|	ROC_AUC|
+|-------------|--------|
+| enc3 |	0.760 | 
+| enc	| 0.755 |
+| enc1	| 0.755 | 
+| enc2	| 0.575 |
+
+</div>
 
 <div align="center">
  <img alt ="Matriz de confusion KNN" src="/img/matriz_KNN.png" // title="Matriz de confusion KNN">
 
-|            |  precision |   recall   |  f1-score  | support  |
-|------------|------------|------------|------------|----------|
-|Existing Customer|      0.92  |    0.96    |  0.94      | 1701 |
-|Attrited Customer|      0.74  |    0.55    |  0.63      | 325  |
-|    accuracy|            |            |  0.90      | 2026 |
-|   macro avg|       0.83 |     0.76   |   0.78     | 2026 |
-|weighted avg|       0.89 |     0.90   |   0.89     | 2026 |
 </div>
 
+### Random Forest Classifier
 
-## Random Forest Classifier
+Este modelo tambien arrojo resultados muy buenos sin necesidad de tunear demasiado los hiperparametros. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
 
-De los tres modelos probados, este fue el que mejor resultado arrojo sin necesidad de tunear demasiado los hiperparametros. 
+<div align="center">
 
+| Datos usados|	ROC_AUC|     
+|-------------|--------|   
+| enc |		0.753 |   
+| enc1	| 0.722 |
+| enc2	| 0.721 |
+| enc3	| 0.654 |
+
+</div>
 
 <div align="center">
  <img alt ="Matriz de confusion RFC" src="/img/matriz_RFC.png" // title="Matriz de confusion RFC">
 
-|            |  precision |   recall   |  f1-score  | support  |
-|------------|------------|------------|------------|----------|
-|Existing Customer|      0.92  |    0.99    |  0.95      | 1701 |
-|Attrited Customer|      0.91  |    0.54    |  0.68      | 325  |
-|    accuracy|            |            |  0.92      | 2026 |
-|   macro avg|       0.91 |     0.76   |   0.81     | 2026 |
-|weighted avg|       0.92 |     0.92   |   0.91     | 2026 |
-
 </div>
+
+## Estandarizacion de variables
+
+Para seguir con el analisis se realizo una estandarizacion de las variables, en donde mediante un test de hipotesis se determino que variables tenian una distribucion normal y cuales no. Una vez definido esto, se realizó un StandardScaler para aquellas variables con distribucion normal y para el resto se utilizo un RobustScaler.
+
+Luego se volvio a entrenar a nuestros modelos base con estos nuevos conjuntos de datos estandarizados. 
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC estandarizado | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.769 |
+| KNeighborsClassifier | 0.760 | 0.774 | 
+| RandomForestClassifier | 0.753 | 0.760 |
+ 
+ </div>
+ 
+ > Como podemos ver loas metricas no mejoran demasiado usando los datos estandarizados, pero como era de esperarse, la regresion logistica es el modelo que mejor trabaja con estos datos estandarizados.
+ 
+
+## Reducción de complejidad 
+
+Se intenta reducir la dimensionalidad del modelo utilizando varias técnicas diferentes. Con cada una, se vuelven a evaluar los modelos base para ver si se logro alguna mejora en cuanto al rendimiento. 
+
+### Reducción de dimensionalidad PCA
+
+Se hizo un bucle en donde se intento determinar el mejor roc_auc en funcion de la cantidad de variables, probando con diferentes cantidades entre 1 y 15. Para los 3 modelos evaluados, la cantidad de variables optima era n_components = 3. Por lo que se procede a hacer un analisis del rendimiento de los modelos, aplicando un PCA con n_components = 3 en los datos de train y test. 
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC PCA | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.501 |
+| KNeighborsClassifier | 0.760 | 0.761 | 
+| RandomForestClassifier | 0.753 | 0.710 |
+ 
+  </div>
+
+> Como podemos ver, la metrica de evaluacion disminuye para todos los modelos entenados. Pero no debemos perder de vista, que se logro una reduccion de 21 variables a solo 3. Esto puede ser algo a evaluar cuando es necesario trabajar con conjuntos de datos livianos y faciles de procesar, sacrificando un poco el rendimiento del modelo pero ganando velocidad de procesamiento. 
+
+### Feature selection VarianceThreshold
+
+Se hizo un VarianceThreshold para identificar las variables que representaran el 90% de la varianza del conjunto. Esto logro reducir las 21 dimensiones que tenian nuestros datos orginiales y pasamos a tener solo 11. Podemos ver los resultados de los modelos en la tabal a continuación.
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC VarianceThreshold | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.709 |
+| KNeighborsClassifier | 0.760 | 0.755 | 
+| RandomForestClassifier | 0.753 | 0.792 |
+ 
+  </div>
+
+> Para el RandomForestClassifier la selección de caracteristicas fue bastante útil ya que aumento su metrica en casi un 5%, llevando el rendimiento del modelo a 0.792.
+
+### Feature selection SelectKBest
+
+Se hizo un SelectKBest para que mediante pruebas estadisticas detectara las 7 mejores variables que representaran el conjunto de datos. Este metodo para selección de caracteristicas fue el mas promeetedor, mejorando los resultados en los 3 modelos utilizados. 
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC SelectKBest | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.718 |
+| KNeighborsClassifier | 0.760 | 0.810 | 
+| RandomForestClassifier | 0.753 | 0.764 |
+ 
+  </div>
+
+> Se logro aumentar en gran medida el rendimiento del modelo KNeighborsClassifier (0.810). Superando el rendimiento logrado anteriormente por el RandomForestClassifier
+
+## Tuneo de hiperparametros
+
+Utilizando RandomizedSearchCV fue posible analizar el rendmiento de cada modelo cuando se modificaban sus hiperparametros y con la validacion cruzada realizada con un StratifiedKFold se busco la posibilidad de que el modelo estuviera teniendo overfiting. 
+
+Para este punto, solo se siguio con los modelos KNeighborsClassifier y RandomForestClassifier que habian tenido los mejores resultados anteriormente. Adicionalmente, se hizo una prueba con un XGBOOSTClassifier para comparar resultados. 
+
+<div align="center">
+
+| Modelo            | Hiperparametros | ROC_AUC CV | ROC_AUC optimizado | 
+|-------------------|-----------------|------------|--------------------|
+|RandomForestClassifier|(max_depth=28, n_estimators=633,criterion = 'gini', random_state=0)|0.987|0.908|
+|KNeighborsClassifier|(algorithm='ball_tree', leaf_size=40, n_neighbors=44,weights='distance')|0.926|0.810|
+|XGBClassifier|('subsample': 0.8,'min_child_weight': 5,'max_depth': 7,'gamma': 2,'colsample_bytree': 0.6)|0.982|0.901|
+ 
+</div>
+
+De esta tabla podemos determinar que todos los modelos estan tendiendo a tener un pequeño overfiting, ya que las metricas sobre los datos de entenamiento son un poco mejores que las obtenidas sobre los datos de test. Igualmente, la diferencia no es tan grande por lo que no habria que preocuparse por ello. 
+
+# 7-Conclusión
+
+En conclusión, el modelo a utilizar será un RandomForestClassifier ya que muestra un alto rendimiento para predecir el resultado binario de la variable objetivo en el conjunto de datos. El puntaje ROC AUC de `0.908` indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran. 
+
+Para ello fue necesario lo siguiente:
+- Usar los datos transformados mediante el pipeline `preprocess` que devuelve el conjunto de datos X_train_enc y X_test_enc.
+- No reducir su dimensionalidad
+- Tunear sus hiperparametros con max_depth=28, n_estimators=633, criterion = 'gini', random_state=0
 
