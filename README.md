@@ -395,7 +395,7 @@ De esta tabla podemos determinar que todos los modelos estan tendiendo a tener u
 
 # 7-Conclusión
 
-En conclusión, el modelo que se ha desarrollado muestra un alto rendimiento para predecir el resultado binario de una variable objetivo en un conjunto de datos. El puntaje ROC AUC de `0.908` indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran. 
+En conclusión, el modelo a utilizar será un RandomForestClassifier ya que muestra un alto rendimiento para predecir el resultado binario de la variable objetivo en el conjunto de datos. El puntaje ROC AUC de `0.908` indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran. 
 
 Para ello fue necesario lo siguiente:
 - Usar los datos transformados mediante el pipeline `preprocess` que devuelve el conjunto de datos X_train_enc y X_test_enc.
