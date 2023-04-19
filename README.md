@@ -214,16 +214,16 @@ Si bien estas variables poseen una correlación de mas de un 0.8 ya no tienen un
 
 Antes de comenzar a probar y analizar los resultados obtenidos con diferentes modelos, fue necesario hacer algunas transformaciones de los datos. Para lo que se utilizaron diferentes métodos por medio de pipelines con el fin de transformar los datos de diferentes formas y realizar pruebas para ver si esto meejoraba el rendimiento de los modelos. 
 
-En el archivo --------- podemos encontrar el detalle de estos pipelines, pero a continuacion podran ver una tabla de que conjuntos se crearon y que se hizo en cada uno.
+En el notebook de este [`LINK`](Modelos.ipynb) podemos encontrar el detalle de estos pipelines, pero a continuacion podran ver una tabla de que conjuntos se crearon y que se hizo en cada uno.
 
 <div align="center">
 
-| Pipeline |  Transformaciones | Conjunto train |  Conjunto test |
-|----------|-------------------|----------------|----------------|
-| preprocess | OHE + Ordinalencoder(con MinMaxScaler) | X_train_enc | X_test_enc |
-| preprocess1 | OHE (drop = 'first') | X_train_enc1 | X_test_enc2 |
-| preprocess2 | OHE, OrdinalEncoder y resto numerico MinMaXScaler | X_train_enc2 | X_test_enc2 | 
-| preprocess3 | OHE (sin drop = 'first') quitando columnas correlacionadas | X_train_enc3 | X_test_enc3|
+| Pipeline |  Transformaciones | Conjunto train |  Conjunto test | conjunto |
+|----------|-------------------|----------------|----------------| ---------|
+| preprocess | OHE + Ordinalencoder(con MinMaxScaler) | X_train_enc | X_test_enc | enc | 
+| preprocess1 | OHE (drop = 'first') | X_train_enc1 | X_test_enc2 | enc 1 | 
+| preprocess2 | OHE, OrdinalEncoder y resto numerico MinMaXScaler | X_train_enc2 | X_test_enc2 | enc2 | 
+| preprocess3 | OHE (sin drop = 'first') quitando columnas correlacionadas | X_train_enc3 | X_test_enc3| enc3 | 
 
 </div>
 
@@ -242,7 +242,9 @@ Una vez transformados los datos, comenzamos con el entrenamiento de modelos. En 
 
 Para poder evaluar los modelos se eligió una metrica especifica en fucnion del problema. Esta fue ROC_AUC. Mediante ella, se evalua y compara la performance de los distintos modelos. Logistic Regression, KNN y Random Forest Classifier.
 
-## Logistic Regression
+## Modelos base
+
+### Logistic Regression
 
 Este modelo ofrecio resulados interesantes, considerando que el tuneo de hiperparametros fue nulo. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
 
@@ -262,7 +264,7 @@ Este modelo ofrecio resulados interesantes, considerando que el tuneo de hiperpa
 
 </div>
 
-## KNN
+### KNeighborsClassifier
 
 A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que no se realizo ningun tipo de optimizacion de hiperparametros. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
 
@@ -282,8 +284,7 @@ A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que
 
 </div>
 
-
-## Random Forest Classifier
+### Random Forest Classifier
 
 Este modelo tambien arrojo resultados muy buenos sin necesidad de tunear demasiado los hiperparametros. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
 
@@ -298,10 +299,106 @@ Este modelo tambien arrojo resultados muy buenos sin necesidad de tunear demasia
 
 </div>
 
-
 <div align="center">
  <img alt ="Matriz de confusion RFC" src="/img/matriz_RFC.png" // title="Matriz de confusion RFC">
 
-
 </div>
+
+## Estandarizacion de variables
+
+Para seguir con el analisis se realizo una estandarizacion de las variables, en donde mediante un test de hipotesis se determino que variables tenian una distribucion normal y cuales no. Una vez definido esto, se realizó un StandardScaler para aquellas variables con distribucion normal y para el resto se utilizo un RobustScaler.
+
+Luego se volvio a entrenar a nuestros modelos base con estos nuevos conjuntos de datos estandarizados. 
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC estandarizado | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.769 |
+| KNeighborsClassifier | 0.760 | 0.774 | 
+| RandomForestClassifier | 0.753 | 0.760 |
+ 
+ </div>
+ 
+ > Como podemos ver loas metricas no mejoran demasiado usando los datos estandarizados, pero como era de esperarse, la regresion logistica es el modelo que mejor trabaja con estos datos estandarizados.
+ 
+
+## Reducción de complejidad 
+
+Se intenta reducir la dimensionalidad del modelo utilizando varias técnicas diferentes. Con cada una, se vuelven a evaluar los modelos base para ver si se logro alguna mejora en cuanto al rendimiento. 
+
+### Reducción de dimensionalidad PCA
+
+Se hizo un bucle en donde se intento determinar el mejor roc_auc en funcion de la cantidad de variables, probando con diferentes cantidades entre 1 y 15. Para los 3 modelos evaluados, la cantidad de variables optima era n_components = 3. Por lo que se procede a hacer un analisis del rendimiento de los modelos, aplicando un PCA con n_components = 3 en los datos de train y test. 
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC PCA | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.501 |
+| KNeighborsClassifier | 0.760 | 0.761 | 
+| RandomForestClassifier | 0.753 | 0.710 |
+ 
+  </div>
+
+> Como podemos ver, la metrica de evaluacion disminuye para todos los modelos entenados. Pero no debemos perder de vista, que se logro una reduccion de 21 variables a solo 3. Esto puede ser algo a evaluar cuando es necesario trabajar con conjuntos de datos livianos y faciles de procesar, sacrificando un poco el rendimiento del modelo pero ganando velocidad de procesamiento. 
+
+### Feature selection VarianceThreshold
+
+Se hizo un VarianceThreshold para identificar las variables que representaran el 90% de la varianza del conjunto. Esto logro reducir las 21 dimensiones que tenian nuestros datos orginiales y pasamos a tener solo 11. Podemos ver los resultados de los modelos en la tabal a continuación.
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC VarianceThreshold | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.709 |
+| KNeighborsClassifier | 0.760 | 0.755 | 
+| RandomForestClassifier | 0.753 | 0.792 |
+ 
+  </div>
+
+> Para el RandomForestClassifier la selección de caracteristicas fue bastante útil ya que aumento su metrica en casi un 5%, llevando el rendimiento del modelo a 0.792.
+
+### Feature selection SelectKBest
+
+Se hizo un SelectKBest para que mediante pruebas estadisticas detectara las 7 mejores variables que representaran el conjunto de datos. Este metodo para selección de caracteristicas fue el mas promeetedor, mejorando los resultados en los 3 modelos utilizados. 
+
+<div align="center">
+
+| Modelo | ROC_AUC base | ROC_AUC SelectKBest | 
+|--------|--------------|-----------------------|
+| LogisticRegression | 0.712 | 0.718 |
+| KNeighborsClassifier | 0.760 | 0.810 | 
+| RandomForestClassifier | 0.753 | 0.764 |
+ 
+  </div>
+
+> Se logro aumentar en gran medida el rendimiento del modelo KNeighborsClassifier (0.810). Superando el rendimiento logrado anteriormente por el RandomForestClassifier
+
+## Tuneo de hiperparametros
+
+Utilizando RandomizedSearchCV fue posible analizar el rendmiento de cada modelo cuando se modificaban sus hiperparametros y con la validacion cruzada realizada con un StratifiedKFold se busco la posibilidad de que el modelo estuviera teniendo overfiting. 
+
+Para este punto, solo se siguio con los modelos KNeighborsClassifier y RandomForestClassifier que habian tenido los mejores resultados anteriormente. Adicionalmente, se hizo una prueba con un XGBOOSTClassifier para comparar resultados. 
+
+<div align="center">
+
+| Modelo            | Hiperparametros | ROC_AUC CV | ROC_AUC optimizado | 
+|-------------------|-----------------|------------|--------------------|
+|RandomForestClassifier|(max_depth=28, n_estimators=633,criterion = 'gini', random_state=0)|0.987|0.908|
+|KNeighborsClassifier|(algorithm='ball_tree', leaf_size=40, n_neighbors=44,weights='distance')|0.926|0.810|
+|XGBClassifier|('subsample': 0.8,'min_child_weight': 5,'max_depth': 7,'gamma': 2,'colsample_bytree': 0.6)|0.982|0.901|
+ 
+</div>
+
+De esta tabla podemos determinar que todos los modelos estan tendiendo a tener un pequeño overfiting, ya que las metricas sobre los datos de entenamiento son un poco mejores que las obtenidas sobre los datos de test. Igualmente, la diferencia no es tan grande por lo que no habria que preocuparse por ello. 
+
+# 7-Conclusión
+
+En conclusión, el modelo que se ha desarrollado muestra un alto rendimiento para predecir el resultado binario de una variable objetivo en un conjunto de datos. El puntaje ROC AUC de `0.908` indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran. 
+
+Para ello fue necesario lo siguiente:
+- Usar los datos transformados mediante el pipeline `preprocess` que devuelve el conjunto de datos X_train_enc y X_test_enc.
+- No reducir su dimensionalidad
+- Tunear sus hiperparametros con max_depth=28, n_estimators=633, criterion = 'gini', random_state=0
 
