@@ -198,7 +198,7 @@ Credit limit VS avg open to buy
 
 Podemos observar que existe una correlacion casi perfecta entre estas dos variables. Y esto es de esperarse debido a la naturaleza de las mismas. 
 
-El AVG Open tu Buy representa cuanto puede comprar una persona sin tener problemas crediticios, por lo que mientras mayor sea el limite de credito que posea, mayor sera el AVG open to buy. 
+El AVG Open to Buy representa cuanto puede comprar una persona sin tener problemas crediticios, por lo que mientras mayor sea el limite de credito que posea, mayor sera el AVG open to buy. 
 
 >Nota: Se considerara la posibildiad de quitar una de estas columnas para no tener dos tipos de datos que indiquen lo mismo. 
 
@@ -208,83 +208,100 @@ total trans amt VS total trans ct
  <img alt ="Total Trans Amt VS Total Trans Ct" src="/img/TTA_vs_TTC.png"// title="Total Trans Amt VS Total Trans Ct">
 </div>
 
-Customer age VS months on book
--
-<div align="center">
- <img alt ="Customer Age VS Months on Book" src="/img/CA_vs_MOB.png" // title="Customer Age VS Months on Book">
-</div>
-
-Total revolving bal VS avg utilization ratio
--
-<div align="center">
- <img alt ="Total Revolving Bal VS Avg Utilization Ratio" src="/img/TRB_vs_AUR.png" // title="Total Revolving Bal VS Avg Utilization Ratio">
-</div>
-
-Avg open to buy VS avg utilization ratio
--
-<div align="center">
- <img alt ="Avg Open To Buy VS Avg Utilization Ratio" src="/img/AOTB_vs_AUR.png" // title="Avg Open To Buy VS Avg Utilization Ratio">
-</div>
-
+Si bien estas variables poseen una correlación de mas de un 0.8 ya no tienen un comportamiento tan marcado como el caso anterior. Pero es interesante ver que la mayoria de las transacciones se encuentran en montos menores a 6000 para ambos targets.
 
 # 6-Prueba de modelos
 
-Antes de comenzar a probar y analizar los resultados obtenidos con diferentes modelos, fue necesario hacer algunas transformaciones de los datos. Para lo que se utilizo Ordinal Encoder y One Hot Encoder con el objetivo de convertir las variables categoricas en variables numericas. De esta forma fue posible utilizarlas en cualquier tipo de modelo. 
+Antes de comenzar a probar y analizar los resultados obtenidos con diferentes modelos, fue necesario hacer algunas transformaciones de los datos. Para lo que se utilizaron diferentes métodos por medio de pipelines con el fin de transformar los datos de diferentes formas y realizar pruebas para ver si esto meejoraba el rendimiento de los modelos. 
 
-En esta etapa se obtienen resultados de manera rapida y sencilla con distintos modelos, mediante la minima o nula optimizacion de hiperparametros.
+En el archivo --------- podemos encontrar el detalle de estos pipelines, pero a continuacion podran ver una tabla de que conjuntos se crearon y que se hizo en cada uno.
 
-Los modelos elegidos para comenzar con esta etapa fueron 3 de los mas conocidos. Logistic Regression, KNN y Random Forest Classifier.
+<div align="center">
+
+| Pipeline |  Transformaciones | Conjunto train |  Conjunto test |
+|----------|-------------------|----------------|----------------|
+| preprocess | OHE + Ordinalencoder(con MinMaxScaler) | X_train_enc | X_test_enc |
+| preprocess1 | OHE (drop = 'first') | X_train_enc1 | X_test_enc2 |
+| preprocess2 | OHE, OrdinalEncoder y resto numerico MinMaXScaler | X_train_enc2 | X_test_enc2 | 
+| preprocess3 | OHE (sin drop = 'first') quitando columnas correlacionadas | X_train_enc3 | X_test_enc3|
+
+</div>
+
+Por ultimo transformamos los datos del conjunto "Y" para que las categorias esten representadas por 1 y 0 segun el target que nos interesa detectar
+
+<div align="center">
+
+| Target | Código | 
+|--------|--------|
+|Attrited Customer | 1 | 
+| Existing Customer | 0 |
+
+</div>
+
+Una vez transformados los datos, comenzamos con el entrenamiento de modelos. En esta etapa se obtienen resultados de manera rapida y sencilla con distintos modelos, mediante la minima o nula modificacion de hiperparametros. A estos modelos les llamamos MODELOS BASE
+
+Para poder evaluar los modelos se eligió una metrica especifica en fucnion del problema. Esta fue ROC_AUC. Mediante ella, se evalua y compara la performance de los distintos modelos. Logistic Regression, KNN y Random Forest Classifier.
 
 ## Logistic Regression
 
-Este resultado ofrecio resulados interesantes, considerando que el tuneo de hiperparametros fue nulo.
+Este modelo ofrecio resulados interesantes, considerando que el tuneo de hiperparametros fue nulo. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
+
+<div align="center">
+
+| Datos usados|	ROC_AUC|
+|-------------|--------|
+| enc1 |	0.712 | 
+| enc	| 0.710 |
+| enc2	| 0.706 | 
+| enc3	| 0.659 |
+
+</div>
 
 <div align="center">
  <img alt ="Matriz de confusion Logistic Regression" src="/img/matriz_reg_log.png" // title="Matriz de confusion Logistic Regression">
-
-|            |  precision |   recall   |  f1-score  | support  |
-|------------|------------|------------|------------|----------|
-|Existing Customer|      0.90  |    0.97    |  0.94      | 1701 |
-|Attrited Customer|      0.74  |    0.45    |  0.56      | 325  |
-|    accuracy|            |            |  0.89      | 2026 |
-|   macro avg|       0.82 |     0.71   |   0.75     | 2026 |
-|weighted avg|       0.88 |     0.89   |   0.88     | 2026 |
-
 
 </div>
 
 ## KNN
 
-A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que no se realizo ningun tipo de optimizacion de hiperparametros 
+A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que no se realizo ningun tipo de optimizacion de hiperparametros. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
+
+<div align="center">
+
+| Datos usados|	ROC_AUC|
+|-------------|--------|
+| enc3 |	0.760 | 
+| enc	| 0.755 |
+| enc1	| 0.755 | 
+| enc2	| 0.575 |
+
+</div>
 
 <div align="center">
  <img alt ="Matriz de confusion KNN" src="/img/matriz_KNN.png" // title="Matriz de confusion KNN">
 
-|            |  precision |   recall   |  f1-score  | support  |
-|------------|------------|------------|------------|----------|
-|Existing Customer|      0.92  |    0.96    |  0.94      | 1701 |
-|Attrited Customer|      0.74  |    0.55    |  0.63      | 325  |
-|    accuracy|            |            |  0.90      | 2026 |
-|   macro avg|       0.83 |     0.76   |   0.78     | 2026 |
-|weighted avg|       0.89 |     0.90   |   0.89     | 2026 |
 </div>
 
 
 ## Random Forest Classifier
 
-De los tres modelos probados, este fue el que mejor resultado arrojo sin necesidad de tunear demasiado los hiperparametros. 
+Este modelo tambien arrojo resultados muy buenos sin necesidad de tunear demasiado los hiperparametros. Podemos ver una tabla con los resultados arrojados para los distintos tipos de datos transofrmados. 
+
+<div align="center">
+
+| Datos usados|	ROC_AUC|     
+|-------------|--------|   
+| enc |		0.753 |   
+| enc1	| 0.722 |
+| enc2	| 0.721 |
+| enc3	| 0.654 |
+
+</div>
 
 
 <div align="center">
  <img alt ="Matriz de confusion RFC" src="/img/matriz_RFC.png" // title="Matriz de confusion RFC">
 
-|            |  precision |   recall   |  f1-score  | support  |
-|------------|------------|------------|------------|----------|
-|Existing Customer|      0.92  |    0.99    |  0.95      | 1701 |
-|Attrited Customer|      0.91  |    0.54    |  0.68      | 325  |
-|    accuracy|            |            |  0.92      | 2026 |
-|   macro avg|       0.91 |     0.76   |   0.81     | 2026 |
-|weighted avg|       0.92 |     0.92   |   0.91     | 2026 |
 
 </div>
 
