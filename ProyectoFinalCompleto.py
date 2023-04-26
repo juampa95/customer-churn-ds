@@ -31,6 +31,8 @@ from sklearn.metrics import (
     mean_squared_error,
     confusion_matrix)
 
+from sklearn.dummy import DummyClassifier
+
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.experimental import enable_halving_search_cv  # noqa
@@ -197,51 +199,7 @@ plt.show()
 
 bank_df.head()
 
-"""## Glosario
-
-**CLIENTNUM** Client number. Unique identifier for the customer holding the account
-
-**Attrition_FlagInternal** event (customer activity) variable - if the account is closed then 1 else 0
-
-**Customer_Age Demographic** variable - Customer's Age in Years
-
-**Gender Demographic** variable - M=Male, F=Female
-
-**Dependent_count** Demographic variable - Number of dependents
-
-**Education_Level** Demographic variable - Educational Qualification of the account holder (example: high school, college graduate, etc.)
-
-**Marital_Status** Demographic variable - Married, Single, Divorced, Unknown
-
-**Income_Category** Demographic variable - Annual Income Category of the account holder (<40K,40K-60K,60K-80K,80K-120K,>120K, Unknown)
-
-**Card_Category** Product Variable - Type of Card (Blue, Silver, Gold, Platinum)
-
-**Months_on_book** Period of relationship with bank
-
-**Total_Relationship_Count** Total no. of products held by the customer
-
-**Months_Inactive_12_mon** No. of months inactive in the last 12 months
-
-**Contacts_Count_12_mon** No. of Contacts in the last 12 months
-
-**Credit_Limit Credit** Limit on the Credit Card
-
-**Total_Revolving_Bal** Total Revolving Balance on the Credit Card
-
-**Avg_Open_To_Buy** Open to Buy Credit Line (Average of last 12 months)
-
-**Total_Amt_Chng_Q4_Q1** Change in Transaction Amount (Q4 over- Q1)
-
-**Total_Trans_Amt** Total Transaction Amount (Last 12 months)
-
-**Total_Trans_Ct** Total Transaction Count (Last 12 months)
-
-**Total_Ct_Chng_Q4_Q1** Change in Transaction Count (Q4 over Q1)
-
-**Avg_Utilization_Ratio** Average Card Utilization Ratio
-
-# 1- OBJETIVOS
+"""# 1- OBJETIVOS
 
 **Objetivos principales**
 
@@ -299,7 +257,51 @@ H0 = La media de la variacion en cantidad de transacciones Q4 -Q1 (Total_Ct_Chng
 ## Pregunta 7
 ¿Que nivel de ingresos tienen los clientes que abandonan los servicios?
 
-# 4-Análisis Exploratorio de Datos (EDA)
+#4-Glosario
+
+**CLIENTNUM** Client number. Unique identifier for the customer holding the account
+
+**Attrition_FlagInternal** event (customer activity) variable - if the account is closed then 1 else 0
+
+**Customer_Age Demographic** variable - Customer's Age in Years
+
+**Gender Demographic** variable - M=Male, F=Female
+
+**Dependent_count** Demographic variable - Number of dependents
+
+**Education_Level** Demographic variable - Educational Qualification of the account holder (example: high school, college graduate, etc.)
+
+**Marital_Status** Demographic variable - Married, Single, Divorced, Unknown
+
+**Income_Category** Demographic variable - Annual Income Category of the account holder (<40K,40K-60K,60K-80K,80K-120K,>120K, Unknown)
+
+**Card_Category** Product Variable - Type of Card (Blue, Silver, Gold, Platinum)
+
+**Months_on_book** Period of relationship with bank
+
+**Total_Relationship_Count** Total no. of products held by the customer
+
+**Months_Inactive_12_mon** No. of months inactive in the last 12 months
+
+**Contacts_Count_12_mon** No. of Contacts in the last 12 months
+
+**Credit_Limit Credit** Limit on the Credit Card
+
+**Total_Revolving_Bal** Total Revolving Balance on the Credit Card
+
+**Avg_Open_To_Buy** Open to Buy Credit Line (Average of last 12 months)
+
+**Total_Amt_Chng_Q4_Q1** Change in Transaction Amount (Q4 over- Q1)
+
+**Total_Trans_Amt** Total Transaction Amount (Last 12 months)
+
+**Total_Trans_Ct** Total Transaction Count (Last 12 months)
+
+**Total_Ct_Chng_Q4_Q1** Change in Transaction Count (Q4 over Q1)
+
+**Avg_Utilization_Ratio** Average Card Utilization Ratio
+
+# 5-EDA
 """
 
 bank_df.describe(include = "all").T
@@ -826,7 +828,7 @@ La misma NO es muy elevada. Pero observando los graficos anteriores, podemos not
 
 En funcion de la alta correlacion que tenemos entre credit_limit y avg_open_to_buy, podriamos quitar una de las variables para no pasar el mismo dato 2 veces al modelo y analizar como se modifica el rendimiento de este.
 
-# 5-Prueba de modelos
+# 6-Modelos
 
 Antes de comenzar a probar diferentes modelos, vamos a realizar algunas transfomraciones en los datos.
 
@@ -1102,7 +1104,7 @@ y_test.value_counts()
 
 """## MODELOS BASE
 
-Vamos a usar 3 tipos de modelos de clasificacion. Y van a ser evaluados a travez de varias metricas en conjunto. Se considero utilizar como valor de comparacion la metrica roc_auc, pero igualmente se vera el resultado de el reporte de clasificacion y una matriz de confusion.
+Vamos a usar 3 tipos de modelos de clasificacion y un dummyClassifier. Y van a ser evaluados a traves de varias metricas en conjunto. Se considero utilizar como metrica de decisión el ROC_AUC, pero igualmente se vera el resultado de el reporte de clasificacion y una matriz de confusion.
 """
 
 set_train = [X_train_enc,X_train_enc1,X_train_enc2,X_train_enc3] 
@@ -1112,10 +1114,30 @@ nombre_datos = ['OHE + OrdinalEncoder(MinMaxScaler) | enc',
                 'OHE + Ordinal + resto(MinMaxScaler) | enc2',
                 'OHE(sin drop=first) | enc3']
 
+"""### DummyClassifier"""
+
+dumclas = DummyClassifier(strategy = 'most_frequent')
+res_dumclas = pd.DataFrame(columns=['Datos usados','ROC_AUC'])
+
+for i,j,k in zip(set_train,set_test,nombre_datos):
+  dumclas.fit(i,y_train)
+  y_pred_dum = dumclas.predict(j)
+  res_dumclas.loc[len(res_dumclas)] = [k,roc_auc_score(y_test,y_pred_dum)]
+
+res_dumclas.sort_values('ROC_AUC',ascending=False)
+
+"""> Mejor resultado DummyClassifier"""
+
+dumclas.fit(X_train_enc,y_train)
+y_pred_dum = dumclas.predict(X_test_enc)
+
+print(classification_report(y_test, y_pred_dum))
+print(mat_conf(y_test,y_pred_dum))
+print(f'Metrica seleccionada para evaular ROC_AUC: {roc_auc_score(y_test,y_pred_dum)}')
+
 """### LogisticRegression"""
 
-log_reg = LogisticRegression(max_iter=800,
-                             n_jobs=-1)
+log_reg = LogisticRegression(n_jobs=-1)
 res_log_reg = pd.DataFrame(columns=['Datos usados','ROC_AUC'])
 
 for i,j,k in zip(set_train,set_test,nombre_datos):
@@ -1130,8 +1152,8 @@ res_log_reg.sort_values('ROC_AUC',ascending=False)
 > Mejor resultado LogisticRegression
 """
 
-log_reg.fit(X_train_enc1,y_train)
-y_pred_LR = log_reg.predict(X_test_enc1)
+log_reg.fit(X_train_enc2,y_train)
+y_pred_LR = log_reg.predict(X_test_enc2)
 
 print(classification_report(y_test, y_pred_LR))
 print(mat_conf(y_test,y_pred_LR))
@@ -1139,7 +1161,7 @@ print(f'Metrica seleccionada para evaular ROC_AUC: {roc_auc_score(y_test,y_pred_
 
 """### KNeighborsClassifier"""
 
-knn = KNeighborsClassifier(n_neighbors=9)
+knn = KNeighborsClassifier()
 res_knn = pd.DataFrame(columns=['Datos usados','ROC_AUC'])
 
 for i,j,k in zip(set_train,set_test,nombre_datos):
@@ -1160,10 +1182,7 @@ print(f'Metrica seleccionada para evaular ROC_AUC: {roc_auc_score(y_test,predicc
 
 """### RandomForestClassifier"""
 
-clf = RandomForestClassifier(n_estimators = 100,
-                             max_depth=5, 
-                             random_state=0,
-                             criterion = 'gini')
+clf = RandomForestClassifier()
 
 res_clf = pd.DataFrame(columns=['Datos usados','ROC_AUC'])
 
@@ -1187,14 +1206,16 @@ print(f'Metrica seleccionada para evaular ROC_AUC: {roc_auc_score(y_test,y_pred_
 
 Se usaron tres tipos de modelos para clasificacion. De los cuales obtuvimos diferentes resultados solo cambiando el conjunto de train. Es decir que no se modifciaron los hiperparametros y sieempre se trabajo con el mismo modelo base
 
-> El mejor resultado, en funcion de la metrica seleccionada para evaluarlos, fue el caso de un KNClassifieer usando el set de datos de train modificado con un OHE sin parametro de drop='first' ya que se seleccionaron manualmente que columnas quitar, en funcion de la correlacion que tuvieran. Se uso un criterio de quitar todas aquellas columnas que tuvieran mas de 0.8 de correlacion
+> El mejor resultado, en funcion de la metrica seleccionada para evaluarlos, fue el caso de un RandomForestClassifier usando el set de datos de train modificado con un OHE para algunas variables categoricas sumado a un Ordinal Encoder aplicado sobre aquellas variables a las que se les pudo dar una jerarquia.
 
 ## Estandarizacion de datos
 
 Para algunos modelos como Logistic Regression, puede ser util tener los datos estandarizados. Para ello, vamos a intentar hacer algunos test de hipotesis para definir si las variables tengan una distribucion normal, vamos a estandarizarlos mediante un StandarScaler y en caso de que no tengan una distribucion normal, los vamos a estandarizar mediante un RobusScaler
 """
 
-col_a_estandarizar = set(X_train.columns)-set(['Gender','Marital_Status'])  # Quito las columnas que tendran el label encoder
+X_train_enc.head()
+
+col_a_estandarizar = set(X_train_enc.columns)-set(['Gender_M','Marital_Status_Married','Marital_Status_Single',])  # Quito las columnas que tendran el OHE
 
 #seleccion de columnas normalizadas
 normal_cols = []
@@ -1248,7 +1269,7 @@ X_train_t3.describe().T
 
 """### LogisticRegression c/datos estandarizados"""
 
-log_reg_std = LogisticRegression(max_iter=800,n_jobs=-1)
+log_reg_std = LogisticRegression(n_jobs=-1)
 log_reg_std.fit(X_train_t3,y_train)
 y_pred_LRstd = log_reg_std.predict(X_test_t3)
 
@@ -1259,17 +1280,13 @@ print('Resultados LogisticRegression c/variables sin estandarizar')
 print(classification_report(y_test, y_pred_LR))
 print(f'roc_auc: {roc_auc_score(y_test,y_pred_LR)}')
 
-"""como vemos la estandarizacion de las variables no genero un resultado mejor al que obtuvimos con las variables sin estandarizar.
-
-Queda pendiente analizar si el problema fue el modo en que se estandarizaron o si para este caso no es conveniente hacerlo. 
-
-"""
+"""Como vemos la estandarizacion de las variables mejoro el resultado de la metrica de comparacion en mas de un 6%."""
 
 mat_conf(y_test,y_pred_LR)
 
 """### KNeighborsClassifier c/datos estandarizados"""
 
-knn_std = KNeighborsClassifier(n_neighbors=9) # Instanciamos el clasificador k veces es decir k vecinos cercanos
+knn_std = KNeighborsClassifier() # Instanciamos el clasificador k veces es decir k vecinos cercanos
 knn_std.fit(X_train_t3, y_train)
 predicciones_knn_std = knn_std.predict(X_test_t3)
 
@@ -1280,7 +1297,7 @@ print('Resultados KNeighborsClassifier c/variables sin estandarizar')
 print(classification_report(y_test, predicciones_knn,zero_division=0))
 print(f'roc_auc: {roc_auc_score(y_test,predicciones_knn)}')
 
-"""El resultado mejora, pero no demasiado. 
+"""El resultado mejora un poco mas de un 2% en la metrica de evaluacion.
 
 """
 
@@ -1288,10 +1305,7 @@ mat_conf(y_test,predicciones_knn_std)
 
 """### RandomForestClassifier c/datos estandarizados"""
 
-clf_std = RandomForestClassifier(n_estimators = 100,
-                             max_depth=5, 
-                             random_state=0,
-                             criterion = 'gini')
+clf_std = RandomForestClassifier()
 clf_std.fit(X_train_t3, y_train)
 y_pred_RFCstd = clf_std.predict(X_test_t3)
 
@@ -1302,7 +1316,7 @@ print('Resultados KNeighborsClassifier c/variables sin estandarizar')
 print(classification_report(y_test, y_pred_RFC,zero_division=0))
 print(f'roc_auc: {roc_auc_score(y_test,y_pred_RFC)}')
 
-"""Lo mismo que el modelo anterior. No mejora demasiado el modelo."""
+"""El resultado de la metrica de evaluacion mejora aproximadamente un 1%. Siendo el modelo menos favorecido por esta estandarizacion pero el que logra un mejor resultado. """
 
 mat_conf(y_test,y_pred_RFCstd)
 
@@ -1329,7 +1343,7 @@ Como al cambiar la cantidad de variables que queremos en el PCA nos da diferente
 
 resultados = pd.DataFrame(columns=['cant-variables','accuracy_score','precision_score','recall_score','f1_score','roc_auc_score'])
 
-log_reg_pca = LogisticRegression(max_iter=800,n_jobs=-1)
+log_reg_pca = LogisticRegression(n_jobs=-1)
 for i in range(1,15):
   pca = PCA(n_components = i)
   pca.fit(X_train_enc)
@@ -1349,10 +1363,10 @@ resultados = resultados.set_index('cant-variables')
 
 resultados.sort_values(by='roc_auc_score',ascending=False).head()
 
-"""En funcion de esto, vamos a definir que el resultado para un mejor PCA lo ofrece un n_components = 3"""
+"""En funcion de esto, vamos a definir que el resultado para un mejor PCA lo ofrece un n_components = 10"""
 
-log_reg_pca = LogisticRegression(max_iter=800,n_jobs=-1)
-pca = PCA(n_components = 3)
+log_reg_pca = LogisticRegression(n_jobs=-1)
+pca = PCA(n_components = 10)
 pca.fit(X_train_enc)
 xTest = pca.transform(X_test_enc)
 xTrain = pca.transform(X_train_enc)
@@ -1367,7 +1381,7 @@ print('Resultados LogisticRegression sin modificar')
 print(classification_report(y_test, y_pred_LR))
 print(f'roc_auc : {roc_auc_score(y_test, y_pred_LR)}')
 
-"""El resultado no mejoro
+"""El resultado mejora un 1% con respecto al modelo base sin modificar.
 
 ### KNeighborsClassifier
 
@@ -1412,17 +1426,14 @@ print('Resultados KNeighborsClassifier sin modificaciones')
 print(classification_report(y_test, predicciones_knn,zero_division=0))
 print(f'roc_auc : {roc_auc_score(y_test, predicciones_knn)}')
 
-"""El resultado mejora muy poco. Pero puede ser util reducir la dimensionalidad
+"""El resultado no mejora. Pero puede ser util reducir la dimensionalidad
 
 ### RandomForestClassifier
 """
 
 resultados_rfc = pd.DataFrame(columns=['cant-variables','accuracy_score','precision_score','recall_score','f1_score','roc_auc_score'])
 
-RFC_pca = RandomForestClassifier(n_estimators = 100,
-                             max_depth=5, 
-                             random_state=0,
-                             criterion = 'gini')
+RFC_pca = RandomForestClassifier()
 for i in range(1,15):
   pca = PCA(n_components = i)
   pca.fit(X_train_enc)
@@ -1442,12 +1453,9 @@ resultados_rfc = resultados_rfc.set_index('cant-variables')
 
 resultados_rfc.sort_values(by='roc_auc_score',ascending=False).head()
 
-"""Resultados usando el PCA con un n_components = 3"""
+"""El mejor resultados es usando el PCA con un n_components = 3."""
 
-RFC_pca = RandomForestClassifier(n_estimators = 100,
-                             max_depth=5, 
-                             random_state=0,
-                             criterion = 'gini')
+RFC_pca = RandomForestClassifier()
 pca = PCA(n_components = 3)
 pca.fit(X_train_enc)
 xTest = pca.transform(X_test_enc)
@@ -1506,7 +1514,7 @@ pd.DataFrame(X_tr_vt).shape
 
 """### LogisticRegression c/FeatureSelection por VarianceThreshold"""
 
-log_reg_vt = LogisticRegression(max_iter=800,n_jobs=-1)
+log_reg_vt = LogisticRegression(n_jobs=-1)
 log_reg_vt.fit(X_tr_vt,y_train)
 y_pred_LRvt = log_reg_vt.predict(X_ts_vt)
 
@@ -1518,12 +1526,12 @@ print('Resultados LogisticRegression modelo base')
 print(classification_report(y_test, y_pred_LR))
 print(f'roc_auc : {roc_auc_score(y_test,y_pred_LR)}')
 
-"""Podemos ver que utilizando un umbral de 0.9 las metricas mejoran muy poco, pero reducimos la dimencionalidad de 21 a 11.
+"""Podemos ver que utilizando un umbral de 0.9 las metricas no mejoran, pero reducimos la dimencionalidad de 21 a 11.
 
 ### KNeighborsClassifier c/FeatureSelection por VarianceThreshold
 """
 
-knn_vt = KNeighborsClassifier(n_neighbors=9) # Instanciamos el clasificador k veces es decir k vecinos cercanos
+knn_vt = KNeighborsClassifier()
 knn_vt.fit(X_tr_vt, y_train)
 predicciones_knn_vt = knn_vt.predict(X_ts_vt)
 
@@ -1540,10 +1548,7 @@ print(f'roc_auc : {roc_auc_score(y_test,predicciones_knn)}')
 ### RandomForestClassifier c/FeatureSelection por VarianceThreshold
 """
 
-clf_vt = RandomForestClassifier(n_estimators = 100,
-                             max_depth=5, 
-                             random_state=0,
-                             criterion = 'gini')
+clf_vt = RandomForestClassifier()
 clf_vt.fit(X_tr_vt, y_train)
 y_pred_RFCvt = clf_vt.predict(X_ts_vt)
 
@@ -1555,7 +1560,7 @@ print('Resultados RandomForestClassifier modelo base')
 print(classification_report(y_test, y_pred_RFC,zero_division=0))
 print(f'roc_auc : {roc_auc_score(y_test,y_pred_RFC)}')
 
-"""Vemos que algunas metricas se reducen muy poco, sin embargo el roc_auc aumenta por lo que el modelo mejora su desempeño y reduce la dimensionalidad.
+"""Vemos que todas las meetricas disminuyeen sus valores muy poco, pero reduce la dimensionalidad.
 
 ## Feature Selection con SelectKBest
 """
@@ -1563,7 +1568,7 @@ print(f'roc_auc : {roc_auc_score(y_test,y_pred_RFC)}')
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 
-selector = SelectKBest(score_func=f_classif, k=7)
+selector = SelectKBest(score_func=f_classif, k=7)  # Vamos a selecionar los 7 mejores
 X_tr_sKB = selector.fit_transform(X_train_enc, y_train)
 X_ts_sKB = selector.transform(X_test_enc)
 
@@ -1576,7 +1581,7 @@ pd.DataFrame(X_tr_sKB).shape
 ### LogisticRegression c/FeatureSelection por SelectKBest
 """
 
-log_reg_sKB = LogisticRegression(max_iter=800,n_jobs=-1)
+log_reg_sKB = LogisticRegression(n_jobs=-1)
 log_reg_sKB.fit(X_tr_sKB,y_train)
 y_pred_LRsKB = log_reg_sKB.predict(X_ts_sKB)
 
@@ -1588,12 +1593,12 @@ print('Resultados LogisticRegression modelo base')
 print(classification_report(y_test, y_pred_LR))
 print(f'roc_auc : {roc_auc_score(y_test,y_pred_LR)}')
 
-"""Podemos ver que reduciendo la dimensionalidad en un 66% (ya que quitamos 2/3 de las variables) el rendimiento del modelo en funcion de la roc_auc mejoro un poco
+"""Podemos ver que reduciendo la dimensionalidad en un 66% (ya que quitamos 2/3 de las variables) el rendimiento del modelo en funcion de la roc_auc practicamente no disminuye (menos de un 1%)
 
 ### KNeighborsClassifier c/FeatureSelection por SelectKBest
 """
 
-knn_sKB = KNeighborsClassifier(n_neighbors=9) # Instanciamos el clasificador k veces es decir k vecinos cercanos
+knn_sKB = KNeighborsClassifier() # Instanciamos el clasificador k veces es decir k vecinos cercanos
 knn_sKB.fit(X_tr_sKB, y_train)
 predicciones_knn_sKB = knn_sKB.predict(X_ts_sKB)
 
@@ -1611,10 +1616,7 @@ Ademas de reducir en un 66% la cantidad de variables, aumentan las metricas de e
 ### RandomForestClassifier c/FeatureSelection por SelectKBest
 """
 
-clf_sKB = RandomForestClassifier(n_estimators = 100,
-                             max_depth=5, 
-                             random_state=0,
-                             criterion = 'gini')
+clf_sKB = RandomForestClassifier()
 clf_sKB.fit(X_tr_sKB, y_train)
 y_pred_RFCsKB = clf_sKB.predict(X_ts_sKB)
 
@@ -1628,7 +1630,7 @@ print(f'roc_auc : {roc_auc_score(y_test,y_pred_RFC)}')
 
 """Vemos que algunas metricas se mantienen, pero el modelo sigue conservando su buen desempeño considerando que quitamos el 66% de los datos. la metrica de evaluacion aumenta un poco
 
-> NOTA: Podemos ver que el modelo de KNC mejoro notablemente el rendimiento en cuanto al auc_roc, llegando a un 0.81.
+> NOTA: Podemos ver que el modelo de KNC mejoro notablemente el rendimiento en cuanto al auc_roc, llegando a un 0.8.
 
 ## Cross Validation
 
@@ -1672,9 +1674,9 @@ print(f'roc_auc: {roc_auc_score(y_test, y_pred_LR)}')
 """Analisis de los resultados
 
 *   La media del accuracy es igual a la del modelo sin CV
-*   la media de la precision de la variable objetivo es silmilar 0.738 a 0.74 
-*   la media del recall de la variable objetivo es mayor en el CV (0.51 vs 0.45)
-*   la media del f1-score de la variable objetivo es mayor en el CV (0.6 vs 0.56)
+*   la media de la precision de la variable objetivo es mayor en el CV 0.79 a 0.71 
+*   la media del recall de la variable objetivo es mayor en el CV (0.45 vs 0.43)
+*   la media del f1-score de la variable objetivo es mayor en el CV (0.55 vs 0.56)
 
 Teniendo en cuenta, que el CV se hace sobre los datos de train podemos decir que el modelo tiende a tener un pequeño overfiting en para algunas metricas. Ya que el resultado es mejor para el train que para el test
 
@@ -1762,8 +1764,8 @@ best_model
 
 rfc_optimizado = RandomForestClassifier(random_state = 0,
                                         criterion='gini',
-                                        max_depth=29,
-                                        n_estimators=633)
+                                        max_depth=20,
+                                        n_estimators=700)
 
 rfc_optimizado.fit(X_train_enc, y_train)
 y_pred_RFC_o = rfc_optimizado.predict(X_test_enc)
@@ -1789,6 +1791,62 @@ mat_conf(y_test,y_pred_RFC)
 """Como podemos ver, todas las metricas mejoran considerablemente, y mas aun si prestamos atencion a las predicciones de nuestro target, es decir el 1. 
 
 Mejoran en gran medida todas las metricas.
+
+## Cross Validation con tuneo de hiperparametros para RandomForestClassifier y conjunto estandarizado
+
+Como pudimos ver, el resultado que obtuvo el modelo cuando le pasamos nuestro conjunto de datos estandarizado mejoro en comparacion con el modelo base. Por lo que ahora haremos una busqueda de hiperparametros partiendo de estos datos estandarizados para ver si el rendimiento mejora aun mas. Usando exactamente el mismo metodo de busqueda que para el caso anterior.
+
+LA SIGUIENTE LINEA DEMORA 5 MINUTOS EN EJECUTARSE
+"""
+
+skf3 = StratifiedKFold(n_splits=5,
+                      shuffle=True, 
+                      random_state=4)
+
+rfc_rscv2 = RandomizedSearchCV(rfc, grid_params, cv=skf3, n_jobs=-1, refit=True, return_train_score=True, n_iter=20, random_state=7,verbose=1)
+rfc_rscv2.fit(X_train_t3,y_train)
+
+best_model2 = rfc_rscv2.best_estimator_
+
+rfc_rscv2.best_score_
+
+rfc_rscv2.best_params_
+
+rfc_rscv2.scorer_
+
+best_model2
+
+rfc_optimizado2 = RandomForestClassifier(random_state = 0,
+                                        criterion='gini',
+                                        max_depth=16,
+                                        n_estimators=500)
+
+rfc_optimizado2.fit(X_train_t3, y_train)
+y_pred_RFC_o2 = rfc_optimizado2.predict(X_test_t3)
+
+"""Comparacion de metricas del modelo base y el modelo optimizado"""
+
+print('Resultados RandomForestClassifier optimizado')
+print(classification_report(y_test, y_pred_RFC_o2,zero_division=0))
+print(f'roc_auc : {roc_auc_score(y_test,y_pred_RFC_o2)}')
+print('- '*27)
+print('Resultados RandomForestClassifier modelo base')
+print(classification_report(y_test, y_pred_RFC,zero_division=0))
+print(f'roc_auc : {roc_auc_score(y_test,y_pred_RFC)}')
+
+"""Matriz de confusion modelo optimizado y conjunto de datos estandarizados"""
+
+mat_conf(y_test,y_pred_RFC_o2)
+
+"""Matriz de confusion modelo con tuneo de hiperparametros y datos sin estandarizar"""
+
+mat_conf(y_test,y_pred_RFC_o)
+
+"""Como podemos ver las metricas mejoran en relacion con el modelo base. Pero tambien mejoran en comparacion con el modelo que se entreno SIN utilizar el conjunto de datos estandarizado. La mejora es casi nula, ya que pasamos de un ROC_AUC 0.906 a un ROC_AUC de 0.908
+
+Por otro lado es interesante ver la diferencia entre ambas matrices de confusión. Ya que el modelo entrenado con datos estandarizados mostro una mayor cantidad de TP, tambien aumento considerablemente los valores TN y redujo los FN.
+
+En este caso, seria conveniente analizar comercialmente que le conviene a la empresa o al cliente que va a utilizar el modelo. El equipo recomendaria utilizar los datos estandarizados.
 
 ## CV con hypertuning, evaluado segun ROC_AUC
 """
@@ -1827,12 +1885,12 @@ rfc_rscv.scorer_
 
 pd.DataFrame(rfc_rscv.cv_results_).sort_values('rank_test_score').head()
 
-rfc_optimizado2 = RandomForestClassifier(random_state=0,
+rfc_optimizado3 = RandomForestClassifier(random_state=0,
                              criterion = 'gini',
                              max_depth=20,
                              n_estimators=700)
-rfc_optimizado2.fit(X_train_enc,y_train)
-y_pred = rfc_optimizado2.predict(X_test_enc)
+rfc_optimizado3.fit(X_train_enc,y_train)
+y_pred = rfc_optimizado3.predict(X_test_enc)
 
 """--IMPORTANTE--
 
@@ -1845,34 +1903,12 @@ roc_auc_score(y_test,y_pred)
 
 recall_score(y_test,y_pred)
 
-y_pred_train = rfc_optimizado2.predict(X_train_enc)
+y_pred_train = rfc_optimizado3.predict(X_train_enc)
 
 print(classification_report(y_test,y_pred))
 print(f'roc_auc: {roc_auc_score(y_test,y_pred)}')
 
 """El resultado es muy parecido al que arroja si no le asignamos un scoring de roc_auc.
-
-Las metricas son muy buenas, vamos a hacer una validacion cruzada con un StratifiedKFold para ver si hay overfiting
-"""
-
-skf_rfc = StratifiedKFold(n_splits = 10)
-
-cv_rfc = cross_validate(rfc,
-                             X_train_enc,
-                             y_train,
-                             scoring = ['roc_auc','recall'],
-                             return_train_score=True,
-                             cv = skf_rfc)
-
-pd.DataFrame(cv_rfc)
-
-resultados_train_scores_cv(cv_rfc,'test')
-
-resultados_train_scores_cv(cv_rfc,'train')
-
-"""En la validacion cruzada, el modelo arroja valores muy altos. Tanto para los train como para los de validacion. 
-
-Podriamos decir por la validacion cruzada que no existe un overfiting pero a su vez, los valores arrojados sobre el conjunto test de los datos en esta CV es mayor a las metricas obtenidas en el modelo con mi conjunto test.
 
 ## KNeighborsClassifier hypertuning
 
@@ -2020,7 +2056,7 @@ print(f'roc_auc KNeighborsClassifier: {roc_auc_score(y_test,y_pred_knn_o)}')
 
 """### Conclusión final
 
-En conclusión, el modelo que se ha desarrollado muestra un alto rendimiento para predecir el resultado binario de una variable objetivo en un conjunto de datos. El puntaje ROC AUC de 0.907 indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran.
+En conclusión, el modelo que se ha desarrollado muestra un alto rendimiento para predecir el resultado binario de una variable objetivo en un conjunto de datos. El puntaje ROC AUC de 0.909 indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran.
 
 > EDA
 
@@ -2044,12 +2080,14 @@ print(f'ROC_AUC para RandomForestClassifier - modelo base -: {round(roc_auc_scor
 
 """> Estandarización
 
-Debido a las transformaciones realizadas por OHE y OrdinalEncoder no fue necesario estandarizar las variables. Esto fue puesto a prueba, evaluando el rendimiento del modelo mediante un set de datos estandarizados segun RobustScaler y StandardScaler.
+Debido a las transformaciones realizadas por OHE y OrdinalEncoder se obtuvo un resutado bastante aceptable. Sin embargo tambien se testeo estandarizar las variables. Al evaluar el rendimiento del modelo mediante un set de datos estandarizados segun RobustScaler y StandardScaler se obtuvieron los siguientes resutados
 """
 
 print(f'ROC_AUC para RandomForestClassifier - variables estandarizadas-: {round(roc_auc_score(y_test,y_pred_RFCstd),3)}')
 
-"""> Selección de variables
+"""El resultado mejoro en 0.003 la metrica de evaluacion
+
+> Selección de variables
 
 Se utilizaron 3 metodos de feature selection pero ninguno arrojo una mejora significativa en los modelos entrenados. Quiza en un caso con una mayor cantidad de datos podriamos estar dispuestos a sacrificar un poco el rendimiento por reducir la dimensionalidad de nuestro dataset. Este no era el caso.
 """
@@ -2062,21 +2100,28 @@ print(f'ROC_AUC para RandomForestClassifier - SelectKBest-: {round(roc_auc_score
 
 Se hizo una validacion cruzada con StratifiedKFold en conjunto con un RandomizedSearchCV para lograr obtener los mejores hiperparametros que aumentaran el rendimiento de nuestro modelo.
 
-Los hiperparametros obtenidos fueron los siguientes
+Los hiperparametros obtenidos fueron los siguientes para el modelo entrenado con datos sin estandarizar 
 ```
 rfc_rscv.best_estimator_
-{'n_estimators': 633, 'max_depth': 28}
+{'n_estimators': 700, 'max_depth': 20}
 ```
+En cambio, para el modelo entrenado con datos estandarizados los hiperparametros tomaron otros valores. 
+```
+rfc_rscv2.best_estimator_
+{'n_estimators': 500, 'max_depth': 16}
+```
+
+Analizando la validacion cruzada, podemos decir que en ambos casos, el modelo presenta un pequeño overfiting, ya que las metricas de test son un 5-6% mayores a las metricas de train. Para obtener los mejores resultados deberiamos utilizar el modelo que se entreno con datos estandarizados.
 
 > RESULTADO MODELO FINAL
 
-Utilizando los hiperparametros obtenidos, el modelo aumento notablemente su rendimiento.
+Utilizando los mejores hiperparametros obtenidos y el conjunto de datos estandarizados, el modelo aumento notablemente su rendimiento.
 """
 
-print(f'ROC_AUC para RandomForestClassifier -FINAL-: {round(roc_auc_score(y_test,y_pred_RFC_o),3)}')
+print(f'ROC_AUC para RandomForestClassifier -FINAL-: {round(roc_auc_score(y_test,y_pred_RFC_o2),3)}')
 
 print('Resultados RandomForestClassifier optimizado')
-print(classification_report(y_test, y_pred_RFC_o,zero_division=0))
+print(classification_report(y_test, y_pred_RFC_o2,zero_division=0))
 
-mat_conf(y_test,y_pred_RFC_o)
+mat_conf(y_test,y_pred_RFC_o2)
 
