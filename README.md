@@ -252,10 +252,10 @@ Este modelo ofrecio resulados interesantes, considerando que el tuneo de hiperpa
 
 | Datos usados|	ROC_AUC|
 |-------------|--------|
-| enc1 |	0.712 | 
-| enc	| 0.710 |
-| enc2	| 0.706 | 
-| enc3	| 0.659 |
+| enc2 |	0.706 | 
+| enc	| 0.704 |
+| enc1	| 0.681 | 
+| enc3	| 0.654 |
 
 </div>
 
@@ -272,10 +272,10 @@ A pesar de ser un modelo sencillo, arrojo resultados muy buenos considerando que
 
 | Datos usados|	ROC_AUC|
 |-------------|--------|
-| enc3 |	0.760 | 
-| enc	| 0.755 |
-| enc1	| 0.755 | 
-| enc2	| 0.575 |
+| enc3 |	0.769 | 
+| enc	| 0.768 |
+| enc1	| 0.768 | 
+| enc2	| 0.608 |
 
 </div>
 
@@ -292,10 +292,10 @@ Este modelo tambien arrojo resultados muy buenos sin necesidad de tunear demasia
 
 | Datos usados|	ROC_AUC|     
 |-------------|--------|   
-| enc |		0.753 |   
-| enc1	| 0.722 |
-| enc2	| 0.721 |
-| enc3	| 0.654 |
+| enc |		0.902 |   
+| enc1	| 0.878 |
+| enc2	| 0.863 |
+| enc3	| 0.828 |
 
 </div>
 
@@ -314,13 +314,13 @@ Luego se volvio a entrenar a nuestros modelos base con estos nuevos conjuntos de
 
 | Modelo | ROC_AUC base | ROC_AUC estandarizado | 
 |--------|--------------|-----------------------|
-| LogisticRegression | 0.712 | 0.769 |
-| KNeighborsClassifier | 0.760 | 0.774 | 
-| RandomForestClassifier | 0.753 | 0.760 |
+| LogisticRegression | 0.706 | 0.769 |
+| KNeighborsClassifier | 0.768 | 0.790 | 
+| RandomForestClassifier | 0.902 | 0.907 |
  
  </div>
  
- > Como podemos ver loas metricas no mejoran demasiado usando los datos estandarizados, pero como era de esperarse, la regresion logistica es el modelo que mejor trabaja con estos datos estandarizados.
+ > Como podemos ver las metricas no mejoran demasiado usando los datos estandarizados, pero como era de esperarse, la regresion logistica es el modelo que mejor trabaja con estos datos estandarizados.
  
 
 ## Reducción de complejidad 
@@ -335,9 +335,9 @@ Se hizo un bucle en donde se intento determinar el mejor roc_auc en funcion de l
 
 | Modelo | ROC_AUC base | ROC_AUC PCA | 
 |--------|--------------|-----------------------|
-| LogisticRegression | 0.712 | 0.501 |
-| KNeighborsClassifier | 0.760 | 0.761 | 
-| RandomForestClassifier | 0.753 | 0.710 |
+| LogisticRegression | 0.706 | 0.743 |
+| KNeighborsClassifier | 0.768 | 0.761 | 
+| RandomForestClassifier | 0.902 | 0.791 |
  
   </div>
 
@@ -351,9 +351,9 @@ Se hizo un VarianceThreshold para identificar las variables que representaran el
 
 | Modelo | ROC_AUC base | ROC_AUC VarianceThreshold | 
 |--------|--------------|-----------------------|
-| LogisticRegression | 0.712 | 0.709 |
-| KNeighborsClassifier | 0.760 | 0.755 | 
-| RandomForestClassifier | 0.753 | 0.792 |
+| LogisticRegression | 0.706 | 0.672 |
+| KNeighborsClassifier | 0.768 | 0.768 | 
+| RandomForestClassifier | 0.902 | 0.890 |
  
   </div>
 
@@ -367,9 +367,9 @@ Se hizo un SelectKBest para que mediante pruebas estadisticas detectara las 7 me
 
 | Modelo | ROC_AUC base | ROC_AUC SelectKBest | 
 |--------|--------------|-----------------------|
-| LogisticRegression | 0.712 | 0.718 |
-| KNeighborsClassifier | 0.760 | 0.810 | 
-| RandomForestClassifier | 0.753 | 0.764 |
+| LogisticRegression | 0.706 | 0.695 |
+| KNeighborsClassifier | 0.768 | 0.803 | 
+| RandomForestClassifier | 0.902 | 0.882 |
  
   </div>
 
@@ -385,7 +385,8 @@ Para este punto, solo se siguio con los modelos KNeighborsClassifier y RandomFor
 
 | Modelo            | Hiperparametros | ROC_AUC CV | ROC_AUC optimizado | 
 |-------------------|-----------------|------------|--------------------|
-|RandomForestClassifier|(max_depth=28, n_estimators=633,criterion = 'gini', random_state=0)|0.987|0.908|
+|RandomForestClassifier|(max_depth=28, n_estimators=700,criterion = 'gini', random_state=0)|0.960|0.908|
+|RandomForestClassifier + estandarizacion datos|(max_depth=28, n_estimators=500,criterion = 'gini', random_state=0)|0.959|0.914|
 |KNeighborsClassifier|(algorithm='ball_tree', leaf_size=40, n_neighbors=44,weights='distance')|0.926|0.810|
 |XGBClassifier|('subsample': 0.8,'min_child_weight': 5,'max_depth': 7,'gamma': 2,'colsample_bytree': 0.6)|0.982|0.901|
  
@@ -395,7 +396,7 @@ De esta tabla podemos determinar que todos los modelos estan tendiendo a tener u
 
 # 7-Conclusión
 
-En conclusión, el modelo a utilizar será un RandomForestClassifier ya que muestra un alto rendimiento para predecir el resultado binario de la variable objetivo en el conjunto de datos. El puntaje ROC AUC de `0.908` indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran. 
+En conclusión, el modelo a utilizar será un RandomForestClassifier ya que muestra un alto rendimiento para predecir el resultado binario de la variable objetivo en el conjunto de datos. El puntaje ROC AUC de `0.914` indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran. 
 
 Para ello fue necesario lo siguiente:
 - Usar los datos transformados mediante el pipeline `preprocess` que devuelve el conjunto de datos X_train_enc y X_test_enc.
