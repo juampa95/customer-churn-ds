@@ -400,8 +400,8 @@ En conclusión, el modelo a utilizar será un RandomForestClassifier ya que mues
 
 Para ello fue necesario lo siguiente:
 - Usar los datos transformados mediante el pipeline `preprocess` que devuelve el conjunto de datos X_train_enc y X_test_enc.
-- No reducir su dimensionalidad
-- Tunear sus hiperparametros con max_depth=28, n_estimators=633, criterion = 'gini', random_state=0
+- No reducir su dimensionalidad pero si estandarizar los datos mediante StandarScaler y RobustScaler
+- Tunear sus hiperparametros con max_depth=28, n_estimators=500, criterion = 'gini', random_state=0
 
 Podemos observar la matriz de confusión del modelo final para corroborar el buen desempeño del mismo. 
 
