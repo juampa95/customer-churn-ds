@@ -1182,7 +1182,7 @@ print(f'Metrica seleccionada para evaular ROC_AUC: {roc_auc_score(y_test,predicc
 
 """### RandomForestClassifier"""
 
-clf = RandomForestClassifier()
+clf = RandomForestClassifier(random_state = 0)
 
 res_clf = pd.DataFrame(columns=['Datos usados','ROC_AUC'])
 
@@ -1305,7 +1305,7 @@ mat_conf(y_test,predicciones_knn_std)
 
 """### RandomForestClassifier c/datos estandarizados"""
 
-clf_std = RandomForestClassifier()
+clf_std = RandomForestClassifier(random_state = 0)
 clf_std.fit(X_train_t3, y_train)
 y_pred_RFCstd = clf_std.predict(X_test_t3)
 
@@ -1433,7 +1433,7 @@ print(f'roc_auc : {roc_auc_score(y_test, predicciones_knn)}')
 
 resultados_rfc = pd.DataFrame(columns=['cant-variables','accuracy_score','precision_score','recall_score','f1_score','roc_auc_score'])
 
-RFC_pca = RandomForestClassifier()
+RFC_pca = RandomForestClassifier(random_state = 0)
 for i in range(1,15):
   pca = PCA(n_components = i)
   pca.fit(X_train_enc)
@@ -1548,7 +1548,7 @@ print(f'roc_auc : {roc_auc_score(y_test,predicciones_knn)}')
 ### RandomForestClassifier c/FeatureSelection por VarianceThreshold
 """
 
-clf_vt = RandomForestClassifier()
+clf_vt = RandomForestClassifier(random_state = 0)
 clf_vt.fit(X_tr_vt, y_train)
 y_pred_RFCvt = clf_vt.predict(X_ts_vt)
 
@@ -1616,7 +1616,7 @@ Ademas de reducir en un 66% la cantidad de variables, aumentan las metricas de e
 ### RandomForestClassifier c/FeatureSelection por SelectKBest
 """
 
-clf_sKB = RandomForestClassifier()
+clf_sKB = RandomForestClassifier(random_state = 0)
 clf_sKB.fit(X_tr_sKB, y_train)
 y_pred_RFCsKB = clf_sKB.predict(X_ts_sKB)
 
@@ -1628,7 +1628,7 @@ print('Resultados RandomForestClassifier modelo base')
 print(classification_report(y_test, y_pred_RFC,zero_division=0))
 print(f'roc_auc : {roc_auc_score(y_test,y_pred_RFC)}')
 
-"""Vemos que algunas metricas se mantienen, pero el modelo sigue conservando su buen desempeño considerando que quitamos el 66% de los datos. la metrica de evaluacion aumenta un poco
+"""Vemos que las metricas disminuyen, pero el modelo sigue conservando su buen desempeño considerando que quitamos el 66% de los datos. la metrica de evaluacion aumenta un poco
 
 > NOTA: Podemos ver que el modelo de KNC mejoro notablemente el rendimiento en cuanto al auc_roc, llegando a un 0.8.
 
@@ -1764,7 +1764,7 @@ best_model
 
 rfc_optimizado = RandomForestClassifier(random_state = 0,
                                         criterion='gini',
-                                        max_depth=20,
+                                        max_depth=28,
                                         n_estimators=700)
 
 rfc_optimizado.fit(X_train_enc, y_train)
@@ -1818,7 +1818,7 @@ best_model2
 
 rfc_optimizado2 = RandomForestClassifier(random_state = 0,
                                         criterion='gini',
-                                        max_depth=16,
+                                        max_depth=28,
                                         n_estimators=500)
 
 rfc_optimizado2.fit(X_train_t3, y_train)
@@ -1842,7 +1842,7 @@ mat_conf(y_test,y_pred_RFC_o2)
 
 mat_conf(y_test,y_pred_RFC_o)
 
-"""Como podemos ver las metricas mejoran en relacion con el modelo base. Pero tambien mejoran en comparacion con el modelo que se entreno SIN utilizar el conjunto de datos estandarizado. La mejora es casi nula, ya que pasamos de un ROC_AUC 0.906 a un ROC_AUC de 0.908
+"""Como podemos ver las metricas mejoran en relacion con el modelo base. Pero tambien mejoran en comparacion con el modelo que se entreno SIN utilizar el conjunto de datos estandarizado. La mejora es casi nula, ya que pasamos de un ROC_AUC 0.906 a un ROC_AUC de 0.913
 
 Por otro lado es interesante ver la diferencia entre ambas matrices de confusión. Ya que el modelo entrenado con datos estandarizados mostro una mayor cantidad de TP, tambien aumento considerablemente los valores TN y redujo los FN.
 
@@ -2048,7 +2048,7 @@ print(f'roc_auc XGBClassifier: {roc_auc_score(y_test,y_xbg)}')
 print('- '*27)
 print('RandomForestClassifier')
 print(classification_report(y_test,y_pred))
-print(f'roc_auc RandomForestClassifier: {roc_auc_score(y_test,y_pred_RFC_o)}')
+print(f'roc_auc RandomForestClassifier: {roc_auc_score(y_test,y_pred_RFC_o2)}')
 print('- '*27)
 print('Resultados KNeighborsClassifier')
 print(classification_report(y_test, y_pred_knn_o,zero_division=0))
@@ -2056,7 +2056,7 @@ print(f'roc_auc KNeighborsClassifier: {roc_auc_score(y_test,y_pred_knn_o)}')
 
 """### Conclusión final
 
-En conclusión, el modelo que se ha desarrollado muestra un alto rendimiento para predecir el resultado binario de una variable objetivo en un conjunto de datos. El puntaje ROC AUC de 0.909 indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran.
+En conclusión, el modelo que se ha desarrollado muestra un alto rendimiento para predecir el resultado binario de una variable objetivo en un conjunto de datos. El puntaje ROC AUC de 0.914 indica que el modelo tiene una gran capacidad para distinguir entre aquellos clientes que abandonaran el servicio y los que no lo haran.
 
 > EDA
 
@@ -2103,12 +2103,12 @@ Se hizo una validacion cruzada con StratifiedKFold en conjunto con un Randomized
 Los hiperparametros obtenidos fueron los siguientes para el modelo entrenado con datos sin estandarizar 
 ```
 rfc_rscv.best_estimator_
-{'n_estimators': 700, 'max_depth': 20}
+{'n_estimators': 700, 'max_depth': 28}
 ```
 En cambio, para el modelo entrenado con datos estandarizados los hiperparametros tomaron otros valores. 
 ```
 rfc_rscv2.best_estimator_
-{'n_estimators': 500, 'max_depth': 16}
+{'n_estimators': 500, 'max_depth': 28}
 ```
 
 Analizando la validacion cruzada, podemos decir que en ambos casos, el modelo presenta un pequeño overfiting, ya que las metricas de test son un 5-6% mayores a las metricas de train. Para obtener los mejores resultados deberiamos utilizar el modelo que se entreno con datos estandarizados.
